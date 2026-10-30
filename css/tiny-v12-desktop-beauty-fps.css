@@ -1,0 +1,59 @@
+/* extracted from index.html <style id="tiny-v12-desktop-beauty-fps"> */
+
+/* V12 PC beauty-scene: retain moon, flowers, butterflies and text;
+   remove redundant per-frame SVG filters and repetitive floral strokes.
+   Mobile uses unchanged V11/V5 CSS because all selectors exclude .tiny-mobile. */
+html.tiny-desktop-performance:not(.tiny-mobile) #decor-beauty .tiny-beauty-firefly {
+  box-shadow:0 0 5px 1px rgba(255,205,239,.36)!important;
+  filter:none!important;
+  will-change:transform,opacity;
+}
+html.tiny-desktop-performance:not(.tiny-mobile) #decor-beauty .tiny-meadow-scene .tiny-terrain,
+html.tiny-desktop-performance:not(.tiny-mobile) #decor-beauty .tiny-meadow-scene .tiny-horizon-rim,
+html.tiny-desktop-performance:not(.tiny-mobile) #decor-beauty .tiny-meadow-scene .tiny-meadow-blossom,
+html.tiny-desktop-performance:not(.tiny-mobile) #decor-beauty .tiny-meadow-scene .tiny-meadow-blossom .center,
+html.tiny-desktop-performance:not(.tiny-mobile) #decor-beauty .tiny-orbit-trail circle,
+html.tiny-desktop-performance:not(.tiny-mobile) #decor-beauty .tiny-orchid-svg,
+html.tiny-desktop-performance:not(.tiny-mobile) #decor-beauty .tiny-orchid-svg path {
+  filter:none!important;
+}
+html.tiny-desktop-performance:not(.tiny-mobile) #decor-beauty .tiny-meadow-scene .tiny-meadow-blossom {
+  animation:none!important;
+}
+/* Floral edges stay drawn, but are revealed by the main scene's opacity fade
+   rather than hundreds of individual SVG stroke animations at entry. */
+html.tiny-desktop-performance:not(.tiny-mobile) #beauty-stage .wish-branch,
+html.tiny-desktop-performance:not(.tiny-mobile) #beauty-stage .wish-leaf,
+html.tiny-desktop-performance:not(.tiny-mobile) #beauty-stage .wish-bloom .petals,
+html.tiny-desktop-performance:not(.tiny-mobile) #decor-beauty .tiny-orchid-svg path {
+  animation:none!important;
+  stroke-dasharray:none!important;
+  stroke-dashoffset:0!important;
+}
+html.tiny-desktop-performance:not(.tiny-mobile) #beauty-stage .wish-leaf {
+  opacity:.82!important;transform:none!important;
+}
+html.tiny-desktop-performance:not(.tiny-mobile) #beauty-stage .wish-bloom .petals {
+  opacity:1!important;transform:none!important;
+}
+html.tiny-desktop-performance:not(.tiny-mobile) #beauty-stage .ring {
+  box-shadow:0 0 16px rgba(230,153,224,.055)!important;
+}
+/* Soft single glow on the moon. Orbit still travels smoothly at native RAF. */
+html.tiny-desktop-performance:not(.tiny-mobile) #decor-beauty .tiny-orbit-star.tiny-moon {
+  filter:drop-shadow(0 0 12px rgba(192,221,248,.58))!important;
+}
+html.tiny-desktop-performance:not(.tiny-mobile) #decor-beauty .tiny-moon .tiny-planet-sphere {
+  filter:none!important;
+}
+html.tiny-desktop-performance:not(.tiny-mobile) #decor-beauty .tiny-beauty-petal {
+  filter:none!important;
+  text-shadow:0 0 4px rgba(255,172,220,.30)!important;
+}
+/* The star field remains visible but stationary while Beauty runs, reducing
+   three huge CSS box-shadow background animations on desktop. */
+html.tiny-pc-beauty-v12 #uiverse-starfield #stars,
+html.tiny-pc-beauty-v12 #uiverse-starfield #stars2,
+html.tiny-pc-beauty-v12 #uiverse-starfield #stars3 {
+  animation-play-state:paused!important;
+}

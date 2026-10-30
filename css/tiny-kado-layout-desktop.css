@@ -1,0 +1,252 @@
+/* extracted from index.html <style id="tiny-kado-layout-desktop"> */
+
+/* Chỉ tác động cảnh cuối trên laptop; nhánh mobile và JS/MP3 giữ nguyên. */
+@media (min-width:701px) and (pointer:fine) {
+ #smile-stage .tiny-vinyl-scene {
+     left: 27.1% !important;
+     top: 75.5% !important;
+     width: clamp(112px,11.5vw,180px) !important;
+     z-index: 8 !important;
+ }
+ /* Lời hát nằm kế bên đĩa, giữ cách fade hai dòng đã có */
+ /* Lyric to, rõ và vẫn đặt ngay cạnh đĩa vinyl. */
+ #tiny-lyric-zone {
+     left: 33.5% !important;
+     top: 66.5% !important;
+     width: 23.5% !important;
+     height: 31% !important;
+     z-index: 16 !important;
+ }
+ #tiny-lyric-zone .lyric-line {font-size:clamp(20px,1.9vw,31px) !important;line-height:1.19 !important;}
+ #tiny-lyric-zone .lyric-line.compact {font-size:clamp(18px,1.63vw,27px) !important;}
+ #tiny-lyric-zone .lyric-line:first-child {top:0 !important;}
+ #tiny-lyric-zone .lyric-line:last-child {top:54% !important;}
+ /* Lời chúc lớn hơn nhẹ nhưng giữ hai dòng cân đối. */
+ #text-9 {font-size:clamp(36px,3.3vw,54px) !important;line-height:1.35 !important;}
+ /* Chỉ nhánh PC: kéo Waguri sang trái vào khoảng trống đỏ, vẫn chừa chỗ cho mắt. */
+ #smile-stage .waguri-figure {right:20vw !important;bottom:-1.8vh !important;z-index:3 !important;}
+ #smile-stage .waguri-aura {right:18vw !important;}
+ #smile-stage .waguri-glimmer { opacity:.66; }
+ #smile-stage .smile-ornament.right {opacity:.14 !important;}
+ #smile-stage #kado-flower-frame {
+    position:absolute;
+    right:-1%; bottom:-1.5%;
+    width:27%; height:78%;
+    border:0; display:block;
+    pointer-events:none; z-index:2;
+    background:transparent;
+    opacity:0;
+    transform:translateY(20px) scale(.93);
+    transform-origin:bottom center;
+    transition: opacity 1.8s ease-out .10s,transform 2.6s cubic-bezier(.22,1,.36,1);
+ }
+ #smile-stage.hien-thi #kado-flower-frame {opacity:1;transform:translateY(0) scale(1);}
+}
+@media (max-width:700px), (pointer:coarse) {
+  #kado-flower-frame {display:none !important;}
+}
+
+/* === CẢNH TẶNG CỎ: dùng đúng cây SVG của co-bon-la-phat-sang-1.html ===
+   Chỉ bật cảnh này sau click từ "giữ nụ cười"; tất cả cảnh trước không thay đổi. */
+#clover-blackout {
+    position: absolute;
+    inset: 0;
+    z-index: 4;
+    pointer-events: none;
+    background: #000;
+    opacity: 0;
+    transition: opacity 1.25s ease-in-out;
+}
+body.clover-scene #clover-blackout { opacity: 1; }
+body.clover-scene #khung-mat { z-index: 6; }
+/* Chuyển đổi từ các lớp sao/hoạt ảnh cũ sang nền đen không lốm đốm. */
+body.clover-scene #uiverse-starfield,
+body.clover-scene #tiny-sky,
+body.clover-scene #lower-stars,
+body.clover-scene #sao-vu-tru,
+body.clover-scene #vien-vu-tru {
+    opacity: 0 !important;
+    transition: opacity 1.05s ease-in-out !important;
+}
+#wish-backdrop.clover { background: none !important; }
+#wish-backdrop.clover-give {
+    opacity:1;
+    background:radial-gradient(ellipse 60vw 72vh at 50% 50%, rgba(118,180,255,.20) 0%, rgba(77,151,255,.12) 34%, rgba(18,35,68,.06) 62%, transparent 84%) !important;
+    animation: cloverGiveBlue 2.65s ease-in-out forwards;
+}
+@keyframes cloverGiveBlue {
+    0%   { opacity:0; }
+    54%  { opacity:0; }
+    70%  { opacity:.88; }
+    86%  { opacity:.46; }
+    100% { opacity:0; }
+}
+#khung-mat.wish-clover .truc-x.clover-opening-eye > .con-mat {
+    opacity:1 !important;
+}
+#clover-stage.give-away .clover-sample-garden {
+    animation: cloverGiftRiseFade 2.45s cubic-bezier(.22,1,.36,1) forwards !important;
+}
+#clover-stage.give-away .clover-sample-glow {
+    animation: cloverGiftGlow 2.45s ease-in-out forwards !important;
+}
+#clover-stage.give-away .clover-ambient {
+    animation: cloverGiftAmbient 2.45s ease-in-out forwards !important;
+}
+#clover-stage.give-away .clover-particle-field {
+    animation: cloverGiftParticles 2.1s ease-out forwards;
+}
+@keyframes cloverGiftRiseFade {
+    0%   { opacity:1; transform:translateY(-10px); }
+    52%  { opacity:1; transform:translateY(-10px); }
+    74%  { opacity:1; transform:translateY(40px); }
+    100% { opacity:0; transform:translateY(150px); }
+}
+@keyframes cloverGiftGlow {
+    0%   { opacity:.92; filter:blur(4px) brightness(1); transform:translate(-50%,-50%); }
+    52%  { opacity:1; filter:blur(10px) brightness(1.75); transform:translate(-50%,-50%); }
+    74%  { opacity:.82; filter:blur(12px) brightness(1.35); transform:translate(-50%,-50%); }
+    100% { opacity:0; filter:blur(8px) brightness(1.05); transform:translate(-50%,-50%); }
+}
+@keyframes cloverGiftAmbient {
+    0%   { opacity:.82; }
+    52%  { opacity:1; }
+    74%  { opacity:.84; }
+    100% { opacity:0; }
+}
+@keyframes cloverGiftParticles {
+    from { opacity:1; }
+    to   { opacity:0; }
+}
+#clover-stage { z-index: 5; }
+#clover-stage .clover-ambient {
+    position: absolute;
+    inset: 0;
+    background:
+       radial-gradient(ellipse 86vw 104vh at 81% 53%, rgba(104,255,148,.44), rgba(38,150,67,.22) 36%, rgba(14,48,24,.10) 59%, transparent 79%),
+       radial-gradient(ellipse 138vw 122vh at 58% 58%, rgba(72,196,108,.19), rgba(18,56,29,.06) 60%, transparent 84%),
+       linear-gradient(rgba(18,36,24,.10), rgba(18,36,24,.10));
+    pointer-events:none;
+    filter: blur(1px);
+    animation: cloverSampleAmbient 4.2s ease-in-out infinite alternate;
+}
+#clover-stage .clover-particle-field { position:absolute; inset:0; overflow:hidden; pointer-events:none; }
+#clover-stage .clover-particle {
+    position:absolute;
+    pointer-events:none;
+    border-radius:50%;
+    background: radial-gradient(circle,#eaffd8 0%,rgba(110,255,150,.85) 45%,rgba(60,230,120,0) 75%);
+    box-shadow:0 0 7px rgba(105,245,140,.26);
+}
+#clover-stage .clover-firefly {
+    position:absolute;
+    pointer-events:none;
+    border-radius:50%;
+    background: radial-gradient(circle, rgba(252,255,214,1) 0%, rgba(214,255,154,.98) 28%, rgba(140,255,139,.78) 52%, rgba(120,255,120,0) 78%);
+    box-shadow: 0 0 12px rgba(218,255,176,.78), 0 0 26px rgba(144,255,126,.44), 0 0 42px rgba(125,255,130,.18);
+    opacity:.18;
+    will-change:transform, opacity;
+    animation:
+      cloverFireflyFloat var(--fly-dur, 5.8s) ease-in-out var(--fly-delay, 0s) infinite alternate,
+      cloverFireflyBlink var(--blink-dur, 2.6s) ease-in-out var(--blink-delay, 0s) infinite;
+}
+@keyframes cloverFireflyFloat {
+    0%   { transform: translate(0px, 4px) scale(.78); }
+    50%  { transform: translate(calc(var(--dx, 12px) * .5), calc(var(--dy, -18px) * .5)) scale(1); }
+    100% { transform: translate(var(--dx, 12px), var(--dy, -18px)) scale(.88); }
+}
+@keyframes cloverFireflyBlink {
+    0%, 100% { opacity: .16; }
+    18% { opacity: .40; }
+    42% { opacity: .92; }
+    68% { opacity: .52; }
+    86% { opacity: .84; }
+}
+/* Trên PC: cỏ được đặt BÊN PHẢI đôi mắt, không ở giữa hai mắt. */
+#clover-stage .clover-sample-garden {
+    position:absolute;
+    top:29%;
+    right:8%;
+    width:clamp(176px,20vw,305px);
+    aspect-ratio:240 / 400;
+    opacity:0;
+    transform:translateY(92px) scale(.84);
+    transition:opacity 1.3s ease .18s, transform 2.0s cubic-bezier(.18,.9,.2,1) .18s;
+}
+#clover-stage.hien-thi .clover-sample-garden { opacity:1; transform:translateY(-10px) scale(1.06); animation: cloverSampleFloat 4.4s ease-in-out 1.7s infinite alternate; }
+#clover-stage .clover-sample-glow {
+    position:absolute;
+    left:50%;top:21%;width:178%;aspect-ratio:1;
+    transform:translate(-50%,-50%);
+    border-radius:50%;pointer-events:none;
+    background:radial-gradient(circle,rgba(118,255,172,.88) 0%,rgba(82,255,146,.46) 18%,rgba(42,220,113,.20) 38%,rgba(18,146,75,.10) 58%,transparent 75%);
+    filter: blur(4px);
+    animation:cloverSampleBreath 2.9s ease-in-out infinite alternate;
+}
+#clover-stage .clover-sample-garden svg {
+    position:relative;
+    width:100%;height:100%;overflow:visible;display:block;
+}
+#clover-stage .clover-sample-plant {
+    filter:drop-shadow(0 0 14px rgba(110,255,172,1)) drop-shadow(0 0 34px rgba(52,245,128,.92)) drop-shadow(0 0 86px rgba(30,200,90,.72));
+    animation:cloverSampleShine 2.8s ease-in-out infinite alternate;
+    transform-origin:50% 100%;
+}
+#clover-stage .clover-sample-sway {
+    transform-origin:50% 100%;
+    animation:cloverSampleSway 5s ease-in-out infinite alternate;
+}
+#clover-stage .clover-sample-leaf {
+    transform-box:fill-box; transform-origin:50% 100%;
+    animation:cloverSampleLeaf 2.8s ease-in-out infinite alternate;
+}
+@keyframes cloverSampleAmbient {from {opacity:.72;} to {opacity:1;}}
+@keyframes cloverSampleBreath {
+    from {opacity:.78;transform:translate(-50%,-50%) scale(.90)}
+    to {opacity:1;transform:translate(-50%,-50%) scale(1.16)}
+}
+@keyframes cloverSampleShine {
+    from {filter:drop-shadow(0 0 10px rgba(98,255,162,.92)) drop-shadow(0 0 28px rgba(52,238,123,.72)) drop-shadow(0 0 60px rgba(31,201,93,.46))}
+    to {filter:drop-shadow(0 0 18px rgba(138,255,190,1)) drop-shadow(0 0 46px rgba(76,255,148,.98)) drop-shadow(0 0 112px rgba(41,214,100,.86))}
+}
+@keyframes cloverSampleSway {from {transform:rotate(-1.9deg)} to {transform:rotate(1.9deg)}}
+@keyframes cloverSampleLeaf {from {transform:rotate(-3.6deg) scale(.98)} to {transform:rotate(3.6deg) scale(1.05)}}
+@keyframes cloverSampleFloat {from {transform:translateY(-10px) scale(1.06)} to {transform:translateY(-18px) scale(1.085)}}
+#khung-mat.wish-clover {
+    transform:translateX(-4vw) translateY(1vh) scale(.95);
+    gap:120px;
+    transition:transform 1.35s cubic-bezier(.22,1,.36,1),gap 1.1s ease;
+}
+#khung-mat.wish-clover .mat-cong {opacity:0!important;animation:none!important;}
+#khung-mat.wish-clover .con-mat {
+    visibility:visible!important;
+    border-radius:30px;
+    box-shadow:0 0 26px 9px rgba(0,255,255,.56),0 0 52px 16px rgba(0,255,255,.28),inset 0 0 22px rgba(255,255,255,.80);
+}
+#khung-mat.wish-clover .ma-hong {
+    opacity:.96!important;
+    color:rgba(255,167,203,.96)!important;
+    transform:translateX(-50%) translateY(-4px) scale(1.12);
+    text-shadow:0 0 10px rgba(255,176,210,.25);
+}
+#text-10 {top:11.5%;padding-inline:16px;}
+@media screen and (max-width:700px) and (orientation:portrait) {
+    #clover-stage .clover-sample-garden {width:clamp(150px,42vw,198px);top:48%;right:4.5%;}
+    #clover-stage.hien-thi .clover-sample-garden {transform:translateY(-6px) scale(1.02);}
+    #clover-stage .clover-ambient {
+        background:
+          radial-gradient(ellipse 112vw 86vh at 78% 60%,rgba(92,247,128,.36),rgba(24,95,42,.14) 60%,transparent 94%),
+          linear-gradient(rgba(18,40,24,.12), rgba(18,40,24,.12));
+    }
+    #khung-mat.wish-clover {gap:58px;transform:translate(-4vw,-7dvh) scale(.68);}
+    #khung-mat.wish-clover .truc-x { width:152px; height:152px; }
+    #khung-mat.wish-clover .con-mat { width:146px; height:146px; border-radius:24px; }
+    #text-10, #text-11 {top:8%;font-size:clamp(20px,5.9vw,28px);line-height:1.46;letter-spacing:.5px;}
+}
+@media screen and (orientation:landscape) and (max-height:600px) and (pointer:coarse) {
+    #clover-stage .clover-sample-garden {width:min(24vw,176px);top:21%;right:6%;}
+    #clover-stage .clover-ambient {background:radial-gradient(ellipse 76vw 100vh at 81% 56%,rgba(91,244,131,.32),rgba(14,58,28,.08) 66%,transparent 92%);}
+    #khung-mat.wish-clover {transform:translate(-6vw,0) scale(.60);gap:100px;}
+    #text-10, #text-11 {top:4%;font-size:clamp(18px,4.6vh,26px);}
+}
+

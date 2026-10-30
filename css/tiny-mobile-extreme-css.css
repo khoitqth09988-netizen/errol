@@ -1,0 +1,107 @@
+/* extracted from index.html <style id="tiny-mobile-extreme-css"> */
+
+/* Cấu hình mobile-only; laptop / desktop không có lớp tiny-mobile. */
+.tiny-mobile #tiny-sky .tiny-star:nth-child(n+31),
+.tiny-mobile #lower-stars .lower-star:nth-child(n+13),
+.tiny-mobile #tiny-shop-scene .dalabs-dream-mote:nth-child(n+13),
+.tiny-mobile #tiny-shop-scene .shop-magical-firefly:nth-child(n+11),
+.tiny-mobile #tiny-shop-scene .shop-magical-petal:nth-child(n+16){display:none!important}
+.tiny-mobile #tiny-sky .tiny-star:nth-child(n+13),
+.tiny-mobile #lower-stars .lower-star:nth-child(n+7){animation:none!important;opacity:.6}
+/* Sao vẫn có chiều sâu, bỏ cuộn shadow 3 lớp rất rộng, không giật từng nấc. */
+.tiny-mobile #uiverse-starfield #stars,
+.tiny-mobile #uiverse-starfield #stars2,
+.tiny-mobile #uiverse-starfield #stars3{animation:none!important}
+.tiny-mobile #tiny-shop-scene .dalabs-dream-light{animation:none!important;filter:none!important;opacity:.33}
+.tiny-mobile #tiny-shop-scene .dalabs-dream-neon-border{animation:none!important;opacity:.46}
+.tiny-mobile #tiny-shop-scene .dalabs-dream-stellars path{animation:none!important}
+.tiny-mobile #tiny-shop-scene .dalabs-dream-comets span:nth-child(n+2){display:none!important}
+.tiny-mobile #tiny-shop-scene .dalabs-tiktok{animation:none!important}
+.tiny-mobile #tiny-shop-scene .dalabs-tiktok::before{animation:none!important;display:none}
+.tiny-mobile #tiny-shop-scene .dalabs-aura,
+.tiny-mobile #tiny-shop-scene .dalabs-aurora,
+.tiny-mobile #tiny-shop-scene .dalabs-aurora-layer{filter:none!important}
+.tiny-mobile #shop-product-modal.show{backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
+.tiny-mobile .reality-haze{animation:none!important;filter:none!important}
+/* Chữ vẫn phát sáng, nhưng không dùng nhiều bóng mờ diện tích lớn trên GPU yếu. */
+.tiny-mobile .text-layer{filter:none!important;text-shadow:0 0 9px rgba(255,255,255,.57),0 0 14px rgba(0,225,255,.2)}
+.tiny-mobile #tiny-shop-scene .shop-heading{text-shadow:0 0 9px rgba(160,226,255,.33)}
+/* Bảo lưu màu cyan và biểu cảm của mắt; chỉ gỡ glow động đắt đỏ ở chi tiết phụ. */
+.tiny-mobile .tiny-upgrade-motif{filter:none!important}
+/* Khi trang bị ẩn, không chạy bất kỳ keyframe trang trí nào. */
+.tiny-page-hidden.tiny-mobile .tiny-star,
+.tiny-page-hidden.tiny-mobile .lower-star,
+.tiny-page-hidden.tiny-mobile #tiny-shop-scene *,
+.tiny-page-hidden.tiny-mobile #tiny-shop-scene *::before,
+.tiny-page-hidden.tiny-mobile #tiny-shop-scene *::after{animation-play-state:paused!important}
+\n
+.tiny-mobile #woman-scene { background-image:url(../media/scene-bg-mobile.webp) !important; }
+/* ===== Mobile Scene Stability v2: chỉ Android/iOS/điện thoại; desktop nguyên bản. ===== */
+.tiny-mobile #clover-stage:not(.hien-thi) *,
+.tiny-mobile #luck-stage:not(.hien-thi) *,
+.tiny-mobile #question-stage:not(.hien-thi) *,
+.tiny-mobile #smile-stage:not(.hien-thi) *,
+.tiny-mobile #luck-front-field:not(.active) * {
+    animation-play-state: paused !important;
+}
+/* Giữ các quầng sáng bằng gradient, không animate filter/blur trên cây SVG. */
+.tiny-mobile #clover-stage .clover-ambient {
+    animation:none !important;
+    filter:none !important;
+}
+.tiny-mobile #clover-stage .clover-sample-glow {
+    animation:none !important;
+    filter:none !important;
+    will-change:transform,opacity;
+}
+.tiny-mobile #clover-stage .clover-sample-plant {
+    animation:none !important;
+    filter:drop-shadow(0 0 12px rgba(83,240,139,.68)) !important;
+}
+.tiny-mobile #clover-stage .clover-sample-leaf,
+.tiny-mobile #clover-stage .clover-sample-sway {
+    animation:none !important;
+}
+.tiny-mobile #clover-stage .clover-firefly {
+    box-shadow:0 0 6px rgba(146,250,151,.35);
+    will-change:auto;
+}
+.tiny-mobile #clover-stage .clover-particle {
+    box-shadow:none;
+}
+.tiny-mobile #wish-backdrop { transition:opacity .55s ease !important; }
+.tiny-mobile #wish-backdrop.clover-give {
+    animation:none !important;
+    background:radial-gradient(ellipse 85vw 67vh at 72% 51%,rgba(151,255,183,.32) 0%,rgba(77,180,113,.11) 50%,transparent 80%) !important;
+}
+/* Giai đoạn may mắn / câu hỏi: bỏ blur trên các lớp lớn bị repaint. */
+.tiny-mobile #luck-stage .luck-top-rays {
+    filter:none !important;
+    mix-blend-mode:normal !important;
+    opacity:.38;
+}
+.tiny-mobile #luck-stage .luck-bg-clover,
+.tiny-mobile #luck-stage .luck-bg-clover .luck-bg-svg {
+    filter:none !important;
+}
+.tiny-mobile #luck-stage .luck-fall-clover {
+    filter:none !important;
+}
+.tiny-mobile #question-stage .question-blue-glow,
+.tiny-mobile #question-stage .question-blue-rays {
+    filter:none !important;
+}
+.tiny-mobile #question-stage .question-blue-rays { opacity:.0; }
+.tiny-mobile #question-stage.active .question-blue-rays { opacity:.46; }
+.tiny-mobile #question-stage .question-blue-glow {
+    transition:opacity .8s ease,transform .8s ease;
+}
+/* Ngừng nội suy background-size/background-position của PNG lớn ở cảnh sức khỏe. */
+.tiny-mobile #woman-scene,
+.tiny-mobile #woman-scene.hien-thi {
+    transition:opacity 1.05s ease !important;
+}
+/* Tránh browser tạo thêm texture 2K từ eye-glow khi đang chuyển cảnh. */
+.tiny-mobile #khung-mat.question-one-eye .con-mat {
+    box-shadow:0 0 13px 5px rgba(0,245,255,.48),inset 0 0 12px rgba(255,255,255,.50);
+}

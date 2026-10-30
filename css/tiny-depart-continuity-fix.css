@@ -1,0 +1,11 @@
+/* extracted from index.html <style id="tiny-depart-continuity-fix"> */
+
+/* Ưu tiên cao hơn quy tắc hiển thị tức thì của share-finale-active.
+   Chữ, bình, nền mờ đi êm trong lúc máy bay đang bay; Tiny ở
+   #tiny-reality-eye-host nên hoàn toàn không bị fade theo cảnh cũ. */
+.share-finale-active #share-flight-scene.share-visible.reality-leaving {
+  opacity:0!important; visibility:hidden!important; pointer-events:none!important;
+  transition:opacity 1.43s ease-in-out,visibility 1.43s!important;
+}
+/* Một nhịp khởi động cánh quạt với máy bay độc lập khỏi cảnh nền. */
+body > .share-aircraft-stand.share-takeoff {isolation:isolate;}

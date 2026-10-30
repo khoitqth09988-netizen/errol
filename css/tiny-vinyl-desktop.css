@@ -1,0 +1,87 @@
+/* extracted from index.html <style id="tiny-vinyl-desktop"> */
+
+/* Chỉ bổ sung trang trí ở cảnh nụ cười phiên bản laptop; không tác động JS/nhạc/lyric. */
+#smile-stage .tiny-vinyl-scene {
+    position: absolute;
+    left: 62.3%;
+    top: 48.0%;
+    width: clamp(122px, 12vw, 190px);
+    aspect-ratio: 1;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 1.1s ease-in-out .23s;
+    isolation: isolate;
+}
+#smile-stage.hien-thi .tiny-vinyl-scene { opacity: 1; }
+#smile-stage .tiny-vinyl-scene::before {
+    content: '';
+    position: absolute;
+    inset: -28%;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,183,213,.14) 0%,rgba(213,158,233,.11) 37%,transparent 69%);
+    filter: blur(12px);
+    animation: vinylAura 5.2s ease-in-out infinite alternate;
+    animation-play-state: paused;
+}
+#smile-stage.hien-thi .tiny-vinyl-scene::before { animation-play-state: running; }
+#smile-stage .vinyl-record {
+    display:block;
+    position:relative;
+    width:100%;
+    height:100%;
+    border-radius:50%;
+    filter:drop-shadow(0 0 11px rgba(252,187,232,.17)) drop-shadow(0 7px 12px rgba(0,0,0,.34));
+    animation: vinylTurn 6.3s linear infinite;
+    animation-play-state:paused;
+}
+#smile-stage.hien-thi .vinyl-record { animation-play-state: running; }
+#smile-stage .vinyl-record .disc-edge { fill: #14101c; stroke: rgba(248,195,225,.66); stroke-width: 2.4; }
+#smile-stage .vinyl-record .disc-shine { fill: none; stroke: rgba(253,211,239,.14); stroke-width: 15; stroke-dasharray: 102 540; }
+#smile-stage .vinyl-record .groove { fill:none; stroke: rgba(204,177,225,.23); stroke-width:1.1; }
+#smile-stage .vinyl-record .groove:nth-child(even) { stroke:rgba(244,194,216,.14); }
+#smile-stage .vinyl-record .label-disc { fill:url(#tinyVinylLabel);stroke:#f5c8dc;stroke-opacity:.8;stroke-width:1.5; }
+#smile-stage .vinyl-record .label-heart { fill:#fff1f3; opacity:.93; }
+#smile-stage .vinyl-record .spindle { fill:#ffefd3; }
+#smile-stage .vinyl-note {
+    position:absolute;
+    left:var(--nx);
+    top:var(--ny);
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size:var(--nsize);
+    font-weight:700;
+    color:var(--ncolor);
+    text-shadow: 0 0 8px rgba(255,197,224,.58),0 0 16px rgba(255,216,168,.2);
+    line-height:1;
+    opacity:0;
+    transform: translate3d(0,0,0) scale(.54) rotate(-14deg);
+    animation: vinylNoteFloat var(--ndur) cubic-bezier(.35,.1,.35,1) var(--ndelay) infinite;
+    animation-play-state:paused;
+}
+#smile-stage.hien-thi .vinyl-note { animation-play-state:running; }
+#smile-stage .vinyl-needle {
+    position:absolute;
+    right:-9%;top:-8%;
+    width:44%;height:44%;
+    overflow:visible;
+    transform-origin: 88% 8%;
+    transform:rotate(-2deg);
+    animation: vinylArmSway 5.2s ease-in-out infinite alternate;
+    animation-play-state:paused;
+    filter:drop-shadow(0 0 4px rgba(255,230,198,.24));
+}
+#smile-stage.hien-thi .vinyl-needle {animation-play-state:running;}
+@keyframes vinylTurn { to { transform:rotate(360deg); } }
+@keyframes vinylAura { from {opacity:.65;transform:scale(.94)} to {opacity:1;transform:scale(1.13)} }
+@keyframes vinylArmSway {from {transform:rotate(-2deg)} to {transform:rotate(2deg)} }
+@keyframes vinylNoteFloat {
+    0% { opacity:0; transform: translate3d(0,11px,0) scale(.65) rotate(-12deg); }
+    17% { opacity:.94; }
+    70% { opacity:.70; }
+    100% { opacity:0; transform:translate3d(var(--dx),var(--dy),0) scale(1.18) rotate(14deg); }
+}
+/* Phiên bản điện thoại giữ nguyên 100% bố cục hiện tại. */
+@media screen and (max-width: 1024px), (hover: none) and (pointer: coarse) {
+    #smile-stage .tiny-vinyl-scene { display:none!important; }
+}

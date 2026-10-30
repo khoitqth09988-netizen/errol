@@ -1,0 +1,59 @@
+/* extracted from index.html <style id="tiny-v13-scene-finishing"> */
+
+/* Strictly the tiny moon in Beauty: keep the scenery, flowers and rover's moon intact. */
+#decor-beauty #tiny-orbit-star,
+#decor-beauty #tiny-orbit-trails { display: none !important; }
+
+/* One-shot compositor-friendly light pass between Luck and Question. */
+#tiny-question-entry-v13 {
+  position:absolute; inset:0; z-index:4;
+  visibility:hidden; opacity:0; pointer-events:none;
+  contain:layout paint;
+  background:radial-gradient(ellipse 43% 32% at 50% 37%,
+    rgba(134,244,230,.21) 0%, rgba(94,179,250,.15) 39%, transparent 74%);
+}
+#tiny-question-entry-v13.v13-playing {
+  visibility:visible;
+  animation:v13QuestionVeil .85s ease-out both;
+  will-change:opacity;
+}
+#tiny-question-entry-v13 .v13-light-sweep {
+  position:absolute; left:20%; width:60%; height:2px; top:47%;
+  border-radius:99px;
+  background:linear-gradient(90deg,transparent,rgba(163,250,231,.74) 28%,rgba(141,213,255,.94) 55%,transparent);
+  opacity:0; transform:translate3d(-12%,0,0) scaleX(.55);
+}
+#tiny-question-entry-v13.v13-playing .v13-light-sweep {
+  animation:v13QuestionLine .78s cubic-bezier(.25,.74,.22,1) both;
+  will-change:opacity,transform;
+}
+#tiny-question-entry-v13 .v13-twinkle {
+  position:absolute; display:block; color:#cbf9ff;
+  font-size:clamp(10px,1.35vw,17px); line-height:1;
+  text-shadow:0 0 6px rgba(167,235,255,.58);
+  opacity:0; transform:translate3d(0,9px,0) scale(.6);
+}
+#tiny-question-entry-v13 .v13-twinkle:nth-of-type(1) {left:30%;top:40%;}
+#tiny-question-entry-v13 .v13-twinkle:nth-of-type(2) {left:69%;top:31%;}
+#tiny-question-entry-v13 .v13-twinkle:nth-of-type(3) {left:78%;top:54%;}
+#tiny-question-entry-v13.v13-playing .v13-twinkle {
+  animation:v13QuestionStar .70s ease-out both;
+  will-change:opacity,transform;
+}
+#tiny-question-entry-v13.v13-playing .v13-twinkle:nth-of-type(2){animation-delay:.10s;}
+#tiny-question-entry-v13.v13-playing .v13-twinkle:nth-of-type(3){animation-delay:.19s;}
+@keyframes v13QuestionVeil {0%{opacity:0}28%{opacity:1}65%{opacity:.68}100%{opacity:0}}
+@keyframes v13QuestionLine {
+  0%{opacity:0;transform:translate3d(-12%,0,0) scaleX(.55)}
+  34%{opacity:.78}70%{opacity:.62}
+  100%{opacity:0;transform:translate3d(8%,0,0) scaleX(1.08)}
+}
+@keyframes v13QuestionStar {
+  0%{opacity:0;transform:translate3d(0,9px,0) scale(.6)}
+  42%{opacity:.82;transform:translate3d(0,-2px,0) scale(1.02)}
+  100%{opacity:0;transform:translate3d(0,-12px,0) scale(.88)}
+}
+@media (prefers-reduced-motion:reduce) {
+  #tiny-question-entry-v13.v13-playing,
+  #tiny-question-entry-v13.v13-playing * {animation-duration:.15s!important;}
+}

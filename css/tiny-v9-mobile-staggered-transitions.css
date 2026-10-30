@@ -1,0 +1,26 @@
+/* extracted from index.html <style id="tiny-v9-mobile-staggered-transitions"> */
+
+/* V9 — riêng mobile: phần cỏ nền may mắn hiển thị dần thay vì pop. */
+.tiny-mobile #luck-stage {transition:opacity .95s ease-in-out!important;}
+.tiny-mobile #luck-front-field {transition:opacity 1.05s ease-in-out!important;}
+.tiny-mobile #luck-stage .luck-bg-clover {
+    transition:opacity 1.35s ease-out,transform 1.35s ease-out!important;
+    filter:drop-shadow(0 0 7px rgba(96,244,154,.34))!important;
+}
+.tiny-mobile #luck-stage .luck-bg-clover .luck-bg-svg {filter:none!important;}
+/* Fade the luck decorations in, without starting full-screen moving glow on the first frame. */
+.tiny-mobile #luck-stage .luck-top-rays {filter:none!important;opacity:0;transition:opacity 1.4s ease!important;}
+.tiny-mobile #luck-stage.active .luck-top-rays {opacity:.47!important;}
+/* Prevent retired stage and entering stage from fighting for expensive layers. */
+.tiny-mobile.tiny-v9-question-crossfade #question-stage .question-space-haze,
+.tiny-mobile.tiny-v9-question-crossfade #question-stage .question-blue-rays {animation-play-state:paused!important;}
+.tiny-mobile #tiny-shop-scene.tiny-shop-opening .dalabs-footer *,
+.tiny-mobile #tiny-shop-scene.tiny-shop-opening .shop-magical-firefly,
+.tiny-mobile #tiny-shop-scene.tiny-shop-opening .shop-magical-petal,
+.tiny-mobile #tiny-shop-scene.tiny-shop-opening .shop-magic-vines * {animation-play-state:paused!important;}
+.tiny-mobile.tiny-v9-reality-enter #tiny-reality-scene .reality-haze,
+.tiny-mobile.tiny-v9-reality-enter #tiny-reality-scene .reality-portal {filter:none!important;}
+.tiny-mobile #question-stage .question-blue-rays {filter:none!important;}
+.tiny-mobile #question-stage .question-space-haze {filter:none!important;}
+/* Defer rendering large footer until user actually scrolls toward it. */
+.tiny-mobile #tiny-shop-scene .dalabs-footer {content-visibility:auto;contain-intrinsic-size:auto 460px;}

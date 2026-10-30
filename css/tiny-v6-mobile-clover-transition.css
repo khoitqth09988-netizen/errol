@@ -1,0 +1,36 @@
+/* extracted from index.html <style id="tiny-v6-mobile-clover-transition"> */
+
+/* Mobile-only transition budget: keep Tiny's own eye, blinking and clover animations intact. */
+.tiny-mobile.tiny-v6-clover-switch #smile-stage .waguri-glimmer,
+.tiny-mobile.tiny-v6-clover-switch #smile-stage .smile-ornament,
+.tiny-mobile.tiny-v6-clover-switch #smile-stage .warm-halo,
+.tiny-mobile.tiny-v6-clover-switch #smile-stage .tiny-vinyl-scene *,
+.tiny-mobile.tiny-v6-clover-switch #decor-beauty * {
+    animation-play-state:paused !important;
+}
+/* The blackout handles the fade. Avoid simultaneously fading three enormous star shadow textures. */
+.tiny-mobile.tiny-v6-clover-switch #uiverse-starfield,
+.tiny-mobile.tiny-v6-clover-switch #tiny-sky,
+.tiny-mobile.tiny-v6-clover-switch #lower-stars,
+.tiny-mobile.tiny-v6-clover-switch #sao-vu-tru,
+.tiny-mobile.tiny-v6-clover-switch #vien-vu-tru {
+    transition:none !important;
+    animation:none !important;
+    opacity:0 !important;
+    visibility:hidden !important;
+}
+/* The leaving scene is painted once, then retired, not composited during the clover glow. */
+.tiny-mobile.tiny-v6-clover-switch #smile-stage .waguri-aura,
+.tiny-mobile.tiny-v6-clover-switch #smile-stage .waguri-figure {filter:none !important;}
+.tiny-mobile.tiny-v6-luck-switch #clover-stage,
+.tiny-mobile.tiny-v6-luck-switch #clover-particle-field,
+.tiny-mobile.tiny-v6-luck-switch #wish-backdrop {
+    transition:none !important;
+    animation:none !important;
+    opacity:0 !important;
+    visibility:hidden !important;
+}
+/* During the first frames of luck, stop residual clover glow; keep luck eyes/text composited normally. */
+.tiny-mobile.tiny-v6-luck-switch #clover-stage *,
+.tiny-mobile.tiny-v6-luck-switch #clover-stage *::before,
+.tiny-mobile.tiny-v6-luck-switch #clover-stage *::after {animation-play-state:paused !important;}

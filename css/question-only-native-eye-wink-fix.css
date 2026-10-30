@@ -1,0 +1,5 @@
+/* extracted from index.html <style id="question-only-native-eye-wink-fix"> */
+
+#khung-mat.question-one-eye {animation:none!important;transform:translateY(-1vh) scale(.96)!important;}
+#khung-mat.question-one-eye .truc-x .con-mat {animation:none!important;transform-origin:50% 50%;}
+#khung-mat.question-one-eye .truc-x .mat-cong {animation:none!important;}

@@ -1,0 +1,75 @@
+/* extracted from index.html <style id="tiny-new-landscape-and-fauna"> */
+
+/* === CUSTOM FINISH: landscape/orbit, fauna, and caret smile === */
+/* The previous decorative health crosses sat on top of the girl illustration. */
+#decor-health .tiny-heal-sigil { display:none !important; }
+#decor-health .tiny-heal-sigil svg { display:none !important; }
+
+/* Scene beauty: dusk meadow under a HORIZON silhouette (not the annotated red line). */
+#decor-beauty { isolation:isolate; }
+#decor-beauty .tiny-meadow-scene {position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;overflow:hidden;}
+#decor-beauty .tiny-meadow-scene .tiny-terrain {fill:url(#tinyHillGradient);filter:drop-shadow(0 -6px 14px rgba(215,142,196,.17));}
+#decor-beauty .tiny-meadow-scene .tiny-horizon-rim {fill:none;stroke:rgba(245,172,215,.47);stroke-width:2.4;vector-effect:non-scaling-stroke;filter:drop-shadow(0 0 8px rgba(249,174,219,.38));}
+#decor-beauty .tiny-meadow-scene .tiny-meadow-blossom {filter:drop-shadow(0 0 6px rgba(255,177,225,.3));}
+#decor-beauty .tiny-meadow-scene .tiny-meadow-blossom .stem {fill:none;stroke:#8acaba;stroke-width:2.1;stroke-linecap:round;opacity:.64;}
+#decor-beauty .tiny-meadow-scene .tiny-meadow-blossom .flowerhead {fill:none;stroke:rgba(249,202,238,.76);stroke-width:1.7;}
+#decor-beauty .tiny-meadow-scene .tiny-meadow-blossom .center {fill:#ffe9bd;filter:drop-shadow(0 0 5px #ffd6b3);}
+#decor-beauty .tiny-meadow-scene .tiny-meadow-blossom {transform-box:fill-box;transform-origin:50% 100%;animation:tinyMeadowSway var(--wave,5s) ease-in-out var(--delay,0s) infinite alternate;}
+@keyframes tinyMeadowSway {0%{rotate:-5deg}100%{rotate:5deg}}
+#decor-beauty .tiny-orbit-star {filter:drop-shadow(0 0 10px #bceaff) drop-shadow(0 0 24px rgba(93,189,255,.92));}
+#decor-beauty .tiny-orbit-star .star-outline {stroke:rgba(244,253,255,.98);stroke-width:3;fill:#e9fbff;stroke-linejoin:round;}
+#decor-beauty .tiny-orbit-star .star-halo {fill:rgba(137,214,255,.31);}
+#decor-beauty .tiny-orbit-trail circle {fill:#a4dcff;filter:drop-shadow(0 0 9px #75d6ff);}
+#decor-beauty .tiny-glow-planet {filter:drop-shadow(0 0 9px #bceeff) drop-shadow(0 0 23px rgba(98,186,255,.83));}
+#decor-beauty .tiny-glow-planet .tiny-planet-sphere {filter:drop-shadow(0 0 3px #c7faff);}
+#decor-beauty .tiny-beauty-firefly {position:absolute;z-index:3;left:var(--x);top:var(--y);width:var(--sz);height:var(--sz);border-radius:50%;opacity:0;background:radial-gradient(circle,#fff5d5 10%,#edc8f1 45%,transparent 85%);box-shadow:0 0 10px 2px rgba(255,228,156,.55),0 0 24px rgba(244,172,218,.26);animation:tinyFireflyDrift var(--d) ease-in-out var(--delay) infinite alternate,tinyFireflyPulse var(--p) ease-in-out var(--delay) infinite alternate;}
+@keyframes tinyFireflyDrift {0%{translate:-9px 4px}50%{translate:12px -13px}100%{translate:-4px -28px}}
+@keyframes tinyFireflyPulse {0%{opacity:.11;scale:.56}40%{opacity:.78;scale:1}100%{opacity:.36;scale:.7}}
+
+/* Health scene: graceful sparrows and butterflies, without overlapping the person. */
+#decor-health .tiny-health-fauna {position:absolute;inset:0;overflow:hidden;z-index:2;pointer-events:none;}
+#decor-health .tiny-bird {position:absolute;width:var(--width,66px);height:auto;filter:drop-shadow(0 0 7px rgba(138,213,255,.35));animation:tinyBirdDrift var(--fly,7s) ease-in-out var(--delay,0s) infinite alternate;}
+@keyframes tinyBirdDrift {from{translate:-15px 11px;rotate:-6deg;opacity:.38}to{translate:29px -23px;rotate:6deg;opacity:.9}}
+#decor-health .tiny-health-butterfly {position:absolute;width:var(--width,54px);height:auto;filter:drop-shadow(0 0 9px rgba(250,177,220,.39));animation:tinyButterflyFlight var(--fly,7s) ease-in-out var(--delay,0s) infinite alternate;}
+@keyframes tinyButterflyFlight {from{translate:-13px 11px;rotate:-9deg}to{translate:23px -26px;rotate:11deg}}
+
+/* Restore the classic happy ^^ pose DURING the thank-you scene, after the
+   cyan eyes have had time to bulge and glint first. */
+#share-tiny .tiny-restored-caret {position:absolute;inset:0;width:100%;height:100%;overflow:visible;z-index:30;pointer-events:none;opacity:0;transition:opacity .32s ease;filter:drop-shadow(0 0 5px #a4ffff) drop-shadow(0 0 13px #12f5ff)}
+#share-tiny .tiny-restored-caret path {fill:none;stroke:#9cffff;stroke-linecap:round;stroke-linejoin:round;stroke-width:12;stroke-dasharray:150;stroke-dashoffset:150;}
+#share-tiny.tiny-caret-restored #khung-mat .tiny-morph-svg {opacity:0!important;transition:opacity .22s ease!important;}
+#share-tiny.tiny-caret-restored #khung-mat .tiny-restored-caret {opacity:1!important;}
+#share-tiny.tiny-caret-restored #khung-mat .tiny-restored-caret path {animation:tinyCaretDraw .55s ease-out forwards;}
+@keyframes tinyCaretDraw {to{stroke-dashoffset:0}}
+@media(max-width:700px){
+ #decor-health .tiny-bird{width:calc(var(--width,66px)*.67)}
+ #decor-health .tiny-health-butterfly{width:calc(var(--width,54px)*.69)}
+ #decor-beauty .tiny-meadow-scene .tiny-horizon-rim{stroke-width:1.5}
+ #decor-beauty .tiny-meadow-blossom:nth-child(2n){opacity:.7}
+}
+@media(prefers-reduced-motion:reduce){
+ #decor-beauty .tiny-beauty-firefly,#decor-beauty .tiny-meadow-blossom,
+ #decor-health .tiny-bird,#decor-health .tiny-health-butterfly,
+ #decor-health .tiny-bird *,#decor-health .tiny-health-butterfly * {animation:none!important;}
+ #share-tiny.tiny-caret-restored #khung-mat .tiny-restored-caret path {stroke-dashoffset:0!important;animation:none!important;}
+}
+
+/* Cảnh máy bay tuyệt đối không có các đốm long lanh: chỉ mắt thường -> ^^. */
+#share-tiny #khung-mat .tiny-morph-sparkles,
+#share-tiny #khung-mat .reality-one-piece-reflections {display:none!important;}
+#share-tiny.tiny-caret-restored #khung-mat .con-mat {
+  background:transparent!important;
+  box-shadow:none!important;
+  border-color:transparent!important;
+  overflow:visible!important;
+}
+#share-tiny.tiny-caret-restored #khung-mat .tiny-restored-caret {
+  opacity:1!important;
+  display:block!important;
+  visibility:visible!important;
+}
+
+/* Moon: wider disc, gentle diffused blue-silver moonlight instead of icy planet/neon rings. */
+#decor-beauty .tiny-orbit-star.tiny-moon {filter:drop-shadow(0 0 11px rgba(240,248,255,.56)) drop-shadow(0 0 27px rgba(169,201,234,.27));}
+#decor-beauty .tiny-orbit-star.tiny-moon .tiny-planet-sphere {filter:drop-shadow(0 0 6px rgba(238,250,255,.36));}
+#decor-beauty .tiny-orbit-trail circle {opacity:.27;filter:drop-shadow(0 0 5px rgba(177,204,243,.27));fill:#bdcfdf;}

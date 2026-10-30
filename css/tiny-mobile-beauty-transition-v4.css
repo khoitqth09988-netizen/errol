@@ -1,0 +1,59 @@
+/* extracted from index.html <style id="tiny-mobile-beauty-transition-v4"> */
+
+/* V4 – isolate expensive Beauty/Smile/Luck scenery; no desktop changes. */
+.tiny-mobile #decor-beauty #tiny-orbit-star,
+.tiny-mobile #decor-beauty #tiny-orbit-trails,
+.tiny-mobile #decor-beauty .tiny-moon,
+.tiny-mobile #decor-beauty .tiny-orbit-star,
+.tiny-mobile #decor-beauty .tiny-orbit-trail,
+.tiny-mobile #decor-beauty .tiny-glow-planet {display:none!important;animation:none!important;filter:none!important}
+/* The three massive CSS-box-shadow star backgrounds used to overlap SVG floral layers. */
+.tiny-mobile #uiverse-starfield #stars2,
+.tiny-mobile #uiverse-starfield #stars3 {display:none!important}
+/* Faster, GPU-friendly fades; no SVG filter repaint inside the crossfade. */
+.tiny-mobile #tiny-wish-decor .tiny-decor-mode{transition:opacity .44s ease-out,visibility .44s!important}
+.tiny-mobile #beauty-stage{transition:opacity .55s ease-out,visibility .55s!important}
+.tiny-mobile #smile-stage{transition:opacity .57s ease-out,visibility .57s!important}
+.tiny-mobile #wish-backdrop{transition:opacity .55s ease-out!important}
+.tiny-mobile #wish-backdrop.beauty{
+ background:radial-gradient(ellipse 58vw 40vh at 50% 55%,rgba(161,80,169,.13),transparent 91%)!important
+}
+.tiny-mobile #beauty-stage .ring {box-shadow:none!important;transition:opacity .55s ease-out,transform .58s ease-out!important}
+.tiny-mobile #beauty-stage .ring::before,
+.tiny-mobile #beauty-stage .ring::after {text-shadow:none!important;animation:none!important}
+.tiny-mobile #beauty-stage .wish-floral{filter:none!important}
+/* Flower drawings still appear, but do not continuously repaint dozens of animated SVG strokes. */
+.tiny-mobile #beauty-stage .wish-branch {animation:none!important;stroke-dasharray:none!important;stroke-dashoffset:0!important}
+.tiny-mobile #beauty-stage .wish-bloom .petals {animation:none!important;opacity:1!important;transform:none!important}
+.tiny-mobile #beauty-stage .wish-leaf {animation:none!important;opacity:.8!important;transform:none!important}
+.tiny-mobile #beauty-stage .butterfly-wrap.right{display:none!important}
+.tiny-mobile #beauty-stage .butterfly-wrap{filter:none!important}
+.tiny-mobile #beauty-stage .wish-twinkle:nth-of-type(n+8){display:none!important}
+.tiny-mobile #decor-beauty .tiny-meadow-scene .tiny-terrain,
+.tiny-mobile #decor-beauty .tiny-meadow-scene .tiny-horizon-rim,
+.tiny-mobile #decor-beauty .tiny-meadow-scene .tiny-meadow-blossom,
+.tiny-mobile #decor-beauty .tiny-meadow-scene .tiny-meadow-blossom .center {filter:none!important}
+.tiny-mobile #decor-beauty .tiny-meadow-scene .tiny-meadow-blossom {animation:none!important}
+.tiny-mobile #decor-beauty .tiny-beauty-firefly:nth-of-type(n+9){display:none!important}
+.tiny-mobile #decor-beauty .tiny-beauty-firefly {filter:none!important;box-shadow:0 0 5px rgba(255,200,239,.42)!important;animation-duration:9s,6s!important}
+.tiny-mobile #decor-beauty .tiny-orchid-svg,
+.tiny-mobile #decor-beauty .tiny-orchid-svg path {animation:none!important;filter:none!important}
+.tiny-mobile #decor-beauty .tiny-orchid-svg path {stroke-dashoffset:0!important;stroke-dasharray:none!important}
+.tiny-mobile #decor-beauty .tiny-upgrade-motif {filter:none!important}
+.tiny-mobile #smile-stage .waguri-aura,
+.tiny-mobile #smile-stage .waguri-figure {filter:none!important}
+.tiny-mobile #smile-stage .waguri-aura {animation:none!important}
+.tiny-mobile #smile-stage .waguri-figure {transition:opacity .7s ease,transform .75s ease!important}
+.tiny-mobile #smile-stage .warm-halo {animation:none!important}
+/* Hide only peripheral glimmers while the outgoing and incoming scenes overlap. */
+.tiny-mobile.tiny-scene-transition #smile-stage .waguri-glimmer,
+.tiny-mobile.tiny-scene-transition #beauty-stage .wish-twinkle,
+.tiny-mobile.tiny-scene-transition #decor-beauty .tiny-beauty-firefly{animation-play-state:paused!important}
+/* The luck canvas is still faded, but not drawn underneath the new question for an entire second. */
+.tiny-mobile.tiny-luck-exit #luck-front-field canvas,
+.tiny-mobile.tiny-luck-exit #luck-stage canvas{opacity:0!important;transition:opacity .22s ease-out!important}
+.tiny-mobile.tiny-luck-exit #luck-stage .luck-bg-field,
+.tiny-mobile.tiny-luck-exit #luck-stage .luck-top-rays {opacity:0!important;transition:opacity .24s ease-out!important}
+.tiny-mobile #question-stage .question-space-haze {filter:none!important;mix-blend-mode:normal!important;animation:none!important}
+.tiny-mobile #question-stage .question-blue-rays {filter:none!important;animation:none!important}
+.tiny-mobile #question-stage .question-blue-glow {filter:none!important}

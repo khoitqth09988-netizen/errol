@@ -1,0 +1,26 @@
+/* extracted from index.html <style id="tiny-performance-css"> */
+
+/* ===== Tiny performance layer: background rendering only ===== */
+/* Hidden scenes do not keep running dozens of offscreen CSS keyframes. */
+#tiny-shop-scene:not(.shop-visible) *,
+#tiny-reality-scene:not(.reality-visible) *,
+#share-flight-scene:not(.share-visible) *,
+#smile-stage:not(.hien-thi) .tiny-vinyl-scene *,
+#decor-want:not(.is-visible) *,
+#decor-health:not(.is-visible) *,
+#decor-beauty:not(.is-visible) * {
+  animation-play-state:paused !important;
+}
+/* Lower GPU overdraw on touch devices: decorative glow toned down, signature Tiny eyes untouched. */
+.tiny-lite #shop-magical-field .shop-magical-firefly,
+.tiny-lite #shop-magical-field .shop-magical-petal,
+.tiny-lite .tiny-beauty-firefly { filter:none !important; }
+.tiny-lite #shop-product-modal.show { backdrop-filter:blur(3px); -webkit-backdrop-filter:blur(3px); }
+.tiny-lite #tiny-shop-scene .dalabs-aurora,
+.tiny-lite #tiny-shop-scene .dalabs-aura,
+.tiny-lite #tiny-shop-scene .dalabs-aurora-layer {filter:none !important;}
+@media (max-width:700px) {
+ .tiny-lite #shop-magical-field .shop-magical-firefly:nth-child(3n),
+ .tiny-lite #shop-magical-field .shop-magical-petal:nth-child(3n),
+ .tiny-lite #decor-beauty .tiny-beauty-firefly:nth-of-type(3n) {display:none !important;}
+}

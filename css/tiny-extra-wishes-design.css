@@ -1,0 +1,105 @@
+/* extracted from index.html <style id="tiny-extra-wishes-design"> */
+
+/* Các hiệu ứng tham khảo ý tưởng từ tsParticles (hạt), SVG tim, hoa nở;
+   tự viết CSS/SVG để HTML hoạt động hoàn toàn ngoại tuyến. */
+#tiny-wish-decor {position:fixed;inset:0;z-index:6;pointer-events:none;overflow:hidden;isolation:isolate;}
+.tiny-decor-mode {position:absolute;inset:0;opacity:0;visibility:hidden;transition:opacity 1.35s ease,visibility 1.35s;}
+.tiny-decor-mode.is-visible {opacity:1;visibility:visible;}
+.tiny-decor-mode:not(.is-visible) *, .tiny-decor-mode:not(.is-visible) *::before, .tiny-decor-mode:not(.is-visible) *::after {animation-play-state:paused!important;}
+/* 'Nên là tớ muốn' — sao kết nối như sợi chỉ điều ước, đặt xa chữ và Tiny. */
+.tiny-decor-want {background:radial-gradient(ellipse 35% 35% at 12% 74%,rgba(107,191,255,.10),transparent 85%),radial-gradient(ellipse 32% 36% at 89% 36%,rgba(231,148,240,.09),transparent 85%);}
+.tiny-wish-constellation {position:absolute;width:clamp(150px,24vw,340px);height:auto;fill:none;opacity:.72;filter:drop-shadow(0 0 8px rgba(177,232,255,.26));}
+.tiny-wish-constellation path {stroke:rgba(150,223,255,.52);stroke-width:1.2;stroke-dasharray:3 9;animation:tinyWishDashes 19s linear infinite;}
+.tiny-wish-constellation circle {fill:#e2faff;filter:drop-shadow(0 0 4px #7fdcff);animation:tinyConstTwinkle 3.4s ease-in-out infinite alternate;}
+.tiny-wish-constellation.a {left:2%;top:24%;transform:rotate(-11deg);}
+.tiny-wish-constellation.b {right:2%;bottom:11%;transform:scaleX(-1) rotate(14deg);animation:tinyWishFloat 9s ease-in-out infinite alternate;}
+@keyframes tinyWishDashes {to{stroke-dashoffset:-150;}}
+@keyframes tinyConstTwinkle {from{opacity:.26}to{opacity:1}}
+@keyframes tinyWishFloat {to{translate:0 -14px;}}
+.tiny-wish-orbit {position:absolute;border:1px solid rgba(153,222,253,.19);border-radius:50%;width:clamp(180px,29vw,470px);aspect-ratio:1;left:-11%;bottom:-26%;box-shadow:0 0 27px rgba(95,174,236,.09);animation:tinyWishOrbit 17s linear infinite;}
+.tiny-wish-orbit::after {content:'✧';position:absolute;right:16%;top:9%;font-size:27px;color:#d0fbff;text-shadow:0 0 15px #74ccff;}
+@keyframes tinyWishOrbit {to{rotate:360deg}}
+.tiny-wish-orbit.second {left:auto;bottom:auto;right:-13%;top:-32%;width:clamp(200px,32vw,530px);animation-duration:25s;animation-direction:reverse;border-color:rgba(255,188,234,.13);}
+/* 'Sức khỏe' — nhịp tim mềm, ECG nét mảnh và hạt sáng nhỏ. */
+.tiny-decor-health {background:radial-gradient(ellipse 32% 50% at 10% 65%,rgba(255,118,148,.075),transparent 85%),radial-gradient(ellipse 35% 40% at 90% 78%,rgba(255,185,152,.075),transparent 85%);}
+.tiny-health-heart {position:absolute;width:clamp(110px,14vw,190px);left:6%;bottom:20%;aspect-ratio:1;display:grid;place-items:center;opacity:.75;filter:drop-shadow(0 0 15px rgba(255,108,149,.35));}
+.tiny-health-heart::before,.tiny-health-heart::after {content:'';position:absolute;inset:5%;border:1px solid rgba(255,155,188,.30);border-radius:50%;animation:tinyHeartAura 3.5s ease-out infinite;}
+.tiny-health-heart::after{animation-delay:1.75s;}
+.tiny-health-heart svg{width:51%;fill:rgba(255,142,172,.17);stroke:#ffa4bd;stroke-width:3.2;animation:tinyHeartBeat 1.55s ease-in-out infinite;}
+@keyframes tinyHeartAura {0%{opacity:.75;scale:.6}100%{opacity:0;scale:1.55}}
+@keyframes tinyHeartBeat {0%,43%,100%{scale:.95}7%,21%{scale:1.08}14%{scale:.98}}
+.tiny-health-ecg{position:absolute;left:3%;bottom:10%;width:43vw;max-width:530px;height:90px;opacity:.78;filter:drop-shadow(0 0 7px rgba(255,133,160,.45));}
+.tiny-health-ecg path {fill:none;stroke:rgba(255,180,204,.85);stroke-width:2.3;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:540;stroke-dashoffset:540;animation:tinyECG 4.1s ease-in-out infinite;}
+@keyframes tinyECG {0%{stroke-dashoffset:540;opacity:.12}18%{opacity:.85}62%{stroke-dashoffset:0;opacity:.82}100%{stroke-dashoffset:-540;opacity:0}}
+.tiny-health-speck {position:absolute;left:var(--hx);top:var(--hy);width:var(--hs);height:var(--hs);background:#ffd1e0;border-radius:50%;opacity:0;box-shadow:0 0 10px #ffb0d0;animation:tinyHealthDust var(--hd) ease-in-out var(--hdelay) infinite;}
+@keyframes tinyHealthDust {0%,100%{opacity:0;translate:0 18px;scale:.7}40%{opacity:.8}75%{opacity:.3;translate:9px -19px;scale:1.4}}
+/* 'Xinh đẹp' — cánh hoa rơi và những viên pha lê lấp lánh bên rìa. */
+.tiny-decor-beauty {background:radial-gradient(ellipse 30% 45% at 5% 52%,rgba(255,143,211,.08),transparent),radial-gradient(ellipse 31% 42% at 95% 55%,rgba(172,166,250,.09),transparent);}
+.tiny-beauty-petal {position:absolute;left:var(--px);top:-15%;font-size:var(--ps);line-height:1;color:var(--pc);opacity:0;text-shadow:0 0 10px rgba(255,172,220,.5);animation:tinyPetalFall var(--pd) linear var(--delay) infinite;filter:drop-shadow(0 0 6px rgba(255,184,224,.4));}
+@keyframes tinyPetalFall {0%{opacity:0;transform:translate(0,0) rotate(-28deg) scale(.75)}14%{opacity:.8}80%{opacity:.58}100%{opacity:0;transform:translate(var(--drift),116vh) rotate(385deg) scale(1.15)}}
+.tiny-beauty-glint {position:absolute;left:var(--gx);top:var(--gy);font-size:var(--gs);color:#f7e6ff;text-shadow:0 0 9px #ffd7f1,0 0 25px rgba(198,181,255,.75);opacity:0;animation:tinyBeautyGlimmer var(--gd) ease-in-out var(--gdelay) infinite alternate;}
+@keyframes tinyBeautyGlimmer {from{opacity:.09;transform:scale(.55) rotate(-20deg)}to{opacity:.85;transform:scale(1.2) rotate(20deg)}}
+.tiny-beauty-garland{position:absolute;left:50%;bottom:-20%;width:62vw;max-width:890px;height:35vh;transform:translateX(-50%);border-top:1px solid rgba(255,190,234,.19);border-radius:50%;box-shadow:0 -25px 36px rgba(243,134,221,.08);animation:tinyBeautyGarland 7s ease-in-out infinite alternate;}
+@keyframes tinyBeautyGarland {to{transform:translateX(-50%) translateY(-10px) scaleX(1.07)}}
+@media(max-width:700px){
+ .tiny-wish-constellation{width:38vw;opacity:.65}.tiny-wish-constellation.a{left:-9%;top:30%}.tiny-wish-constellation.b{right:-13%;bottom:21%}
+ .tiny-wish-orbit{width:65vw;left:-35%;bottom:-12%}.tiny-wish-orbit.second{right:-36%;top:-13%;width:70vw}
+ .tiny-health-heart{left:2%;bottom:24%;width:105px;opacity:.6}
+ .tiny-health-ecg{left:3%;bottom:10%;width:63%;height:70px;opacity:.56}
+ .tiny-health-speck:nth-child(n+11){display:none}
+ .tiny-beauty-petal:nth-child(n+10){display:none}
+ .tiny-beauty-garland{width:115vw;height:24vh;bottom:-8%}
+}
+@media(prefers-reduced-motion:reduce){#tiny-wish-decor * {animation:none!important}}
+/* Đổi lời nhờ thành lời cảm ơn bằng crossfade: không thay HTML đột ngột. */
+#share-flight-scene .share-heading-crossfade {
+  display:grid;grid-template-columns:minmax(0,1fr);align-items:center;justify-items:center;
+  width:min(100%,1000px);min-height:2.7em;position:relative;isolation:isolate;
+}
+#share-flight-scene .share-heading-crossfade > span {
+  grid-area:1/1;display:block;width:100%;text-align:center;
+  backface-visibility:hidden;will-change:opacity,transform,filter;
+  transition:opacity .74s cubic-bezier(.2,.7,.3,1),
+             transform .95s cubic-bezier(.16,.72,.2,1),
+             filter .74s ease;
+}
+#share-flight-scene .share-heading-original {opacity:1;transform:translateY(0) scale(1);filter:blur(0);}
+#share-flight-scene .share-heading-thanks {
+  opacity:0;transform:translateY(15px) scale(.94);filter:blur(7px);
+  color:#ffddf3;text-shadow:0 0 15px rgba(255,198,229,.65),0 0 34px rgba(255,135,200,.28);
+  pointer-events:none;
+}
+#share-flight-scene.share-thank-you .share-heading-original {
+  opacity:0;transform:translateY(-14px) scale(.96);filter:blur(7px);
+}
+#share-flight-scene.share-thank-you .share-heading-thanks {
+  opacity:1;transform:translateY(0) scale(1);filter:blur(0);
+  transition-delay:.25s;
+}
+/* Mắt giữ dáng vuông nguyên bản, rồi mềm/phồng nhẹ từng cạnh; lấp lánh nằm trong mắt. */
+#share-tiny.share-tiny-thank-glow #khung-mat .truc-x {
+  transform:translateY(-3px) scale(1.025)!important;
+}
+#share-tiny #khung-mat .tiny-morph-svg .tiny-morph-sparkles {
+  opacity:0;animation:tinyThankGlintIn .82s ease .42s forwards;
+}
+#share-tiny #khung-mat .tiny-morph-svg .tiny-morph-sparkles ellipse,
+#share-tiny #khung-mat .tiny-morph-svg .tiny-morph-sparkles circle {
+  fill:#fff!important;stroke:none!important;
+  filter:drop-shadow(0 0 4px rgba(255,255,255,.86));
+}
+#share-tiny.share-tiny-thank-glow #khung-mat .tiny-morph-svg .tiny-morph-sparkles {filter:drop-shadow(0 0 7px rgba(255,255,255,.83));}
+#share-tiny #khung-mat .tiny-morph-svg .tiny-morph-sparkles .tiny-spark-main {
+  animation:tinyThankSparkPulse 2.7s ease-in-out 1.15s infinite alternate;
+  transform-box:fill-box;transform-origin:center;
+}
+#share-tiny #khung-mat .tiny-morph-svg .tiny-morph-sparkles .tiny-spark-small {
+  animation:tinyThankSparkPulse 3.2s ease-in-out 1.5s infinite alternate-reverse;
+  transform-box:fill-box;transform-origin:center;
+}
+@keyframes tinyThankGlintIn {from{opacity:0}to{opacity:1}}
+@keyframes tinyThankSparkPulse {from{opacity:.65;transform:scale(.82)}to{opacity:1;transform:scale(1.1)}}
+@media (prefers-reduced-motion:reduce) {
+  #share-flight-scene .share-heading-crossfade > span {transition-duration:.12s!important;transition-delay:0s!important;}
+  #share-tiny #khung-mat .tiny-morph-sparkles, #share-tiny #khung-mat .tiny-morph-sparkles * {animation:none!important;opacity:1!important;}
+}
