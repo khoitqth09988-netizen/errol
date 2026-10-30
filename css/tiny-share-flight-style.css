@@ -133,6 +133,11 @@
 .share-aircraft-stand.share-ready:focus-visible {outline:2px solid #96f6ff;outline-offset:5px;border-radius:12px;}
 @keyframes sharePlaneIdle {from{transform:translateY(0)}to{transform:translateY(-3px)}}
 .share-aircraft-stand.share-takeoff {pointer-events:none;}
+/* Cất cánh: đôi mắt Long lanh dần (class share-tiny-thank-glow đã có trong JS từ trước). */
+.share-tiny.share-tiny-thank-glow .share-tiny-eye {
+    box-shadow:0 0 26px 10px rgba(0,255,255,.55),0 0 46px 18px rgba(0,232,255,.3),inset 0 0 20px rgba(242,255,255,.6);
+    transition:box-shadow .9s ease;
+}
 /* Ngôi sao nhỏ bên động cơ, lấy cảm hứng hạt sáng tsParticles, thuần CSS không tải CDN. */
 .share-aircraft-stand.share-takeoff::after{content:'✦  ·  ✧';position:absolute;z-index:7;left:-2%;top:56%;color:#ffe4a1;font-size:19px;white-space:nowrap;letter-spacing:5px;pointer-events:none;
  text-shadow:0 0 9px #ffd580,0 0 24px #ffd580;

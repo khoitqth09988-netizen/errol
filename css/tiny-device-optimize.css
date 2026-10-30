@@ -183,6 +183,13 @@ button {
     100% { transform: translateY(-12px); }
 }
 
+/* Trạng thái "máy bay đang cất cánh..." mờ dần thay vì biến mất một phát */
+#share-flight-scene .share-flight-status.is-gone {
+    opacity: 0;
+    transform: translateY(-8px);
+    transition: opacity .5s ease, transform .5s ease;
+}
+
 .share-flight-heading .share-soft {
     animation: shareSoftGlow 4.2s ease-in-out infinite;
 }
