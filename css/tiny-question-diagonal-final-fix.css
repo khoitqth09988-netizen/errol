@@ -1,0 +1,134 @@
+/* extracted from index.html <style id="tiny-question-diagonal-final-fix"> */
+
+/* Dùng đường chéo đi xuống bên phải theo nét trắng người dùng vẽ.
+   Phải thắng rule #khung-mat.wish-clover.wish-luck { transform: ... !important }. */
+#khung-mat.wish-clover.wish-luck.question-one-eye {
+    transform: translate(0, 7px) rotate(14deg) scale(.97) !important;
+    transform-origin: 50% 50%;
+    transition: transform .56s cubic-bezier(.22,1,.36,1) !important;
+}
+#khung-mat.wish-clover.wish-luck.question-one-eye .truc-x {
+    animation: none !important;
+}
+#khung-mat.wish-clover.wish-luck.question-one-eye .truc-x:first-child .con-mat {
+    animation: none !important;
+    transform: scaleY(1) !important;
+}
+/* Khép mắt phải thành nét mềm, cong rất nhẹ, dày hơn thanh ngang cũ.
+   Phần vuông thu xuống trước khi nhường chỗ cho cung SVG. */
+#khung-mat.wish-clover.wish-luck.question-one-eye .truc-x:last-child > .con-mat.hold-closed {
+    transform: scaleY(.045) !important;
+    opacity: 0 !important;
+    transition: transform .30s cubic-bezier(.4,0,.2,1), opacity .14s ease .19s !important;
+}
+#khung-mat.wish-clover.wish-luck.question-one-eye .truc-x:last-child > .mat-cong {
+    position: absolute;
+    top: 36px;
+    left: 0;
+    width: 160px;
+    height: 70px;
+    transform: none !important;
+    animation: none !important;
+    z-index: 6;
+    opacity: 0 !important;
+    transition: opacity .15s ease !important;
+    filter: drop-shadow(0 0 7px rgba(0,255,255,.98)) drop-shadow(0 0 16px rgba(53,206,255,.64));
+}
+#khung-mat.wish-clover.wish-luck.question-one-eye .truc-x:last-child > .mat-cong.hold-closed {
+    opacity: 1 !important;
+}
+#khung-mat.wish-clover.wish-luck.question-one-eye .truc-x:last-child > .mat-cong path {
+    fill: none !important;
+    stroke: #90ffff !important;
+    stroke-width: 15px !important;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+#text-13 {
+    top: 10.2%;
+    width: 100%;
+    padding-inline: 18px;
+    box-sizing: border-box;
+    font-size: clamp(40px, 4.1vw, 68px) !important;
+    font-weight: 700;
+    letter-spacing: 2.1px;
+    line-height: 1.35;
+    text-align: center;
+    z-index: 12;
+    text-shadow: 0 0 12px rgba(255,255,255,.65), 0 0 25px rgba(198,224,255,.25);
+}
+#text-13 .question-blue-words {
+    color: #85d6ff;
+    white-space: nowrap;
+    text-shadow:
+        0 0 8px rgba(227,252,255,.97),
+        0 0 21px rgba(101,196,255,.92),
+        0 0 43px rgba(49,145,255,.72),
+        0 0 94px rgba(27,99,240,.47);
+}
+/* Toạ độ gốc được JS đo theo getBoundingClientRect() của span "có thể?". */
+#question-stage {
+    --word-x: 50vw;
+    --word-y: 17vh;
+}
+#question-stage::before {
+    background: radial-gradient(ellipse 83vw 88vh at var(--word-x) var(--word-y),
+        rgba(95,182,255,.22) 0%, rgba(32,104,238,.14) 24%, rgba(8,48,126,.075) 42%, transparent 72%);
+}
+#question-stage .question-blue-glow {
+    left: var(--word-x);
+    top: var(--word-y);
+    width: min(130vw, 1600px);
+    height: min(135vh, 1150px);
+    background: radial-gradient(ellipse at center,
+        rgba(196,241,255,.65) 0%,
+        rgba(112,204,255,.44) 10%,
+        rgba(59,139,255,.29) 24%,
+        rgba(24,81,206,.15) 44%,
+        rgba(5,29,108,.065) 59%, transparent 78%);
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(.16);
+    filter: blur(27px);
+    transition: opacity 1.25s ease, transform 1.35s cubic-bezier(.22,1,.36,1);
+}
+#question-stage.active .question-blue-glow {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+}
+#question-stage .question-blue-rays {
+    background:
+      radial-gradient(ellipse 33vw 38vh at var(--word-x) var(--word-y),rgba(183,238,255,.23),transparent 85%),
+      conic-gradient(from 90deg at var(--word-x) var(--word-y),
+        transparent 0deg 14deg,rgba(71,168,255,.14) 24deg,transparent 34deg 46deg,
+        rgba(119,217,255,.15) 57deg,transparent 68deg 85deg,
+        rgba(51,145,255,.11) 102deg,transparent 118deg 178deg,
+        rgba(86,172,255,.12) 203deg,transparent 216deg 267deg,
+        rgba(90,191,255,.10) 279deg,transparent 294deg 360deg);
+    filter: blur(19px);
+}
+@media screen and (max-width:700px) and (orientation:portrait) {
+    #text-13 {
+        top: 9.4%;
+        font-size: clamp(28px, 7.7vw, 38px) !important;
+        letter-spacing: .5px;
+        line-height: 1.48;
+        padding-inline: 10px;
+    }
+    #khung-mat.wish-clover.wish-luck.question-one-eye {
+        transform: translate(0,-4dvh) rotate(13deg) scale(.68) !important;
+    }
+    #question-stage .question-blue-glow {
+        width: 160vw;
+        height: 82vh;
+        filter: blur(20px);
+    }
+}
+@media screen and (orientation:landscape) and (max-height:600px) and (pointer:coarse) {
+    #text-13 {
+        top: 4.4%;
+        font-size: clamp(26px, 5.6vh, 45px) !important;
+    }
+    #khung-mat.wish-clover.wish-luck.question-one-eye {
+        transform: translate(0,0) rotate(13deg) scale(.60) !important;
+    }
+}

@@ -1,0 +1,287 @@
+/* extracted from index.html <style id="tiny-share-flight-style"> */
+
+/* New share finale only. Older scenes, eyes and their animation remain untouched. */
+#share-flight-scene {
+    position:fixed; inset:0; z-index:70; overflow:hidden;
+    display:flex; flex-direction:column; justify-content:center; align-items:center;
+    padding:5vh 18px 5vh; box-sizing:border-box; color:#fff;
+    opacity:0; visibility:hidden; pointer-events:none;
+    transition:opacity 1.05s ease,visibility 1.05s;
+    font-family:'Courier Prime',monospace;
+}
+#share-flight-scene.share-visible { opacity:1; visibility:visible; pointer-events:auto; }
+#share-flight-scene::before {
+    content:''; position:absolute; inset:0; z-index:-1;
+    background:
+      radial-gradient(ellipse 60% 40% at 50% 40%,rgba(66,140,204,.21),transparent 83%),
+      linear-gradient(180deg,rgba(1,4,14,.90),rgba(1,7,24,.83) 42%,rgba(1,3,13,.96));
+}
+.share-flight-heading {position:relative; z-index:3; max-width:1000px; text-align:center; margin:0 0 7px; }
+.share-flight-heading h2 { margin:0; font-size:clamp(27px,3.9vw,57px); line-height:1.35; font-weight:700; letter-spacing:.012em; color:#f2fbff; text-wrap:balance;
+    text-shadow:0 0 12px rgba(167,227,255,.37),0 0 34px rgba(94,185,255,.22); }
+.share-flight-heading .share-soft {color:#a2eaff;text-shadow:0 0 20px rgba(103,209,255,.44);}
+.share-flight-heading .share-flight-small {display:block;margin:0 0 12px;color:#8adcf2;letter-spacing:.26em;text-transform:uppercase;font-family:system-ui,sans-serif;font-size:clamp(10px,1.2vw,14px);opacity:.82;}
+/* Dedicated Tiny on the share scene: no old-scene transforms or double-layer eyes. */
+.share-tiny {position:relative;z-index:7;flex:none;width:min(300px,45vw);height:clamp(92px,15vh,132px);margin:2px auto 2px;pointer-events:none;display:flex;justify-content:center;align-items:center;}
+.share-tiny-eyes {--tiny-eye-size:clamp(66px,7.5vw,104px);--tiny-eye-gap:clamp(35px,6vw,70px);display:flex;gap:var(--tiny-eye-gap);align-items:center;justify-content:center;filter:drop-shadow(0 0 12px rgba(7,229,255,.12));}
+.share-tiny-eye-wrap {position:relative;width:var(--tiny-eye-size);height:calc(var(--tiny-eye-size) + 19px);flex:none;transition:transform .75s cubic-bezier(.2,.85,.26,1);}
+.share-tiny-eye {position:absolute;top:0;left:0;width:100%;height:var(--tiny-eye-size);display:block;border-radius:25%;background:linear-gradient(130deg,#81ffff 0%,#00f4ee 36%,#00e9ec 75%,#beffff 100%);box-shadow:0 0 20px 6px rgba(0,255,255,.45),0 0 38px 12px rgba(0,232,255,.26),inset 0 0 20px rgba(242,255,255,.53);transition:transform .75s cubic-bezier(.2,.85,.26,1),border-radius .6s ease;overflow:hidden;}
+.share-tiny-eye::after {content:'';position:absolute;width:31%;height:26%;left:58%;top:12%;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.36),transparent 74%);opacity:.57;transition:left .65s ease,top .65s ease;}
+.share-tiny-blush {position:absolute;left:50%;bottom:0;transform:translateX(-50%);color:#ffa4cb;letter-spacing:2px;font:700 clamp(13px,1.65vw,22px)/1 system-ui,sans-serif;text-shadow:0 0 6px rgba(255,136,194,.65);white-space:nowrap;opacity:.86;}
+/* Both eyes tilt and drift towards the fuel button on the lower left, then return. */
+.share-tiny.share-tiny-look .share-tiny-eye-wrap:first-child {transform:translate(-24px,18px) rotate(-11deg);}
+.share-tiny.share-tiny-look .share-tiny-eye-wrap:last-child {transform:translate(-17px,17px) rotate(-8deg);}
+.share-tiny.share-tiny-look .share-tiny-eye {transform:scaleY(.88);border-radius:24% 24% 30% 30%;}
+.share-tiny.share-tiny-look .share-tiny-eye::after {left:19%;top:65%;}
+/* A short, gentle blink helps the expression feel alive without competing with the wink scene. */
+.share-tiny.share-tiny-blink .share-tiny-eye {transform:scaleY(.13);}
+/* Khi người dùng đồng ý: cả hai mắt trở thành hai nét ^ ^ rõ ràng, bo tròn. */
+.share-tiny-happy-shape {
+    position:absolute; inset:0; width:100%; height:100%;
+    opacity:0; visibility:hidden; pointer-events:none; overflow:visible;
+    transition:opacity .32s ease;
+}
+.share-tiny-happy-shape path {
+    fill:none; stroke:#9cffff; stroke-width:12;
+    stroke-linecap:round; stroke-linejoin:round;
+    filter:drop-shadow(0 0 6px rgba(0,255,255,.95)) drop-shadow(0 0 10px rgba(0,235,255,.85));
+}
+.share-tiny.share-tiny-cheer .share-tiny-eye-wrap:first-child {transform:translate(-5px,-4px) rotate(-4deg);}
+.share-tiny.share-tiny-cheer .share-tiny-eye-wrap:last-child {transform:translate(5px,-4px) rotate(4deg);}
+.share-tiny.share-tiny-cheer .share-tiny-eye {
+    background:transparent; border-radius:0; box-shadow:none;
+    overflow:visible; transform:scaleY(1);
+}
+.share-tiny.share-tiny-cheer .share-tiny-eye::after {opacity:0;}
+.share-tiny.share-tiny-cheer .share-tiny-happy-shape {opacity:1;visibility:visible;}
+.share-flight-device { position:relative; flex:none; width:min(920px,96vw); height:clamp(215px,32vh,300px); margin-top:4px; isolation:isolate; }
+.share-flight-ground {position:absolute;z-index:-1;bottom:32px;left:4%;right:0;height:2px;
+    background:linear-gradient(90deg,transparent,rgba(104,202,255,.35) 14%,rgba(194,221,250,.52) 65%,transparent);
+    box-shadow:0 0 16px rgba(112,202,255,.33);}
+.share-fuel-button {
+    position:absolute; left:6%;bottom:33px; z-index:6; width:clamp(116px,23%,215px); height:clamp(158px,76%,250px);
+    padding:8px; appearance:none; -webkit-appearance:none; border:2px solid rgba(162,239,255,.79);
+    border-radius:25px 25px 29px 29px; cursor:pointer; color:#fff;
+    background:linear-gradient(130deg,rgba(232,250,255,.09),rgba(4,30,55,.32) 55%,rgba(147,220,255,.07));
+    box-shadow:0 16px 30px rgba(0,0,0,.34);
+    transition:transform .25s ease,box-shadow .25s ease; overflow:hidden; touch-action:manipulation;
+}
+.share-fuel-button::before {content:none;} /* Bỏ viền phụ bên trong thành bình */
+.share-fuel-button:hover:not(:disabled) {transform:translateY(-5px);box-shadow:0 16px 30px rgba(0,0,0,.34);}
+.share-fuel-button:focus-visible {outline:3px solid #fff1ab;outline-offset:5px;}
+.share-fuel-button:disabled {cursor:default;}
+.share-fuel-liquid {
+    --fuel-remaining:80%; position:absolute;z-index:0;left:9px;right:9px;bottom:9px;
+    height:var(--fuel-remaining); border-radius:0 0 17px 17px;
+    /* Clip the liquid and its tiny surface ripples to the inside of the tank. */
+    overflow:hidden; isolation:isolate; box-sizing:border-box;
+    background:linear-gradient(180deg,#fce49a 0%,#ffbf5e 26%,#fe8b87 75%,#b978d9 100%);
+    box-shadow:inset 0 4px 9px rgba(255,255,255,.16);
+    transition:height .06s linear;
+}
+/* Two shallow, translucent ripples contained strictly inside the liquid. */
+.share-fuel-liquid::before,.share-fuel-liquid::after {
+    content:'';position:absolute;pointer-events:none;left:-4%;width:108%;height:7px;top:0;
+    border-radius:50% 50% 45% 55% / 75% 75% 25% 25%;
+    background:rgba(255,244,191,.62);transform-origin:center;
+    animation:shareFuelWave 2.5s ease-in-out infinite alternate;
+}
+.share-fuel-liquid::after {
+    height:4px;top:1px;background:rgba(255,255,237,.45);
+    animation-duration:3.3s;animation-direction:alternate-reverse;
+}
+@keyframes shareFuelWave {
+    0% {transform:translateX(-2%) translateY(0) rotate(-.7deg)}
+    50%{transform:translateX(2%) translateY(1px) rotate(.7deg)}
+    100%{transform:translateX(-2%) translateY(0) rotate(-.7deg)}
+}
+.share-fuel-sheen {position:absolute;z-index:1;inset:5px;border-radius:20px;background:linear-gradient(110deg,rgba(255,255,255,.19),transparent 35%,transparent 68%,rgba(255,255,255,.07));pointer-events:none;}
+.share-fuel-words {position:absolute;left:10px;right:10px;top:38%;z-index:3;
+    display:flex;justify-content:center;align-items:center;
+    padding:9px 0;background:transparent;border:0;border-radius:0;box-shadow:none;
+    backdrop-filter:none;text-shadow:none;pointer-events:none;font-family:system-ui,sans-serif;}
+/* Chữ Đồng ý chỉ có nét viền: ruột chữ hoàn toàn trong suốt. */
+.share-fuel-words strong {font-size:clamp(21px,2.3vw,34px);font-weight:750;line-height:1.2;letter-spacing:.04em;
+    color:transparent;-webkit-text-fill-color:transparent;
+    -webkit-text-stroke:1.45px rgba(248,254,255,.98);
+    paint-order:stroke fill;text-shadow:none;}
+.share-fuel-words small {display:none;}
+.share-fuel-meter {position:absolute;right:11px;top:13px;font:700 12px system-ui,sans-serif;color:#fff;z-index:4;text-shadow:0 1px 5px #4b3050;}
+.share-fuel-nozzle {position:absolute;z-index:6;left:calc(6% + clamp(116px,23%,215px) - 3px);bottom:calc(33px + clamp(158px,76%,250px)*.49);width:27px;height:16px;border-radius:5px;background:#b8eaff;border:3px solid #538aa4;box-shadow:0 0 14px rgba(140,222,255,.6);box-sizing:border-box;}
+.share-fuel-hose {position:absolute;left:calc(6% + clamp(116px,23%,215px) + 10px);right:28%;bottom:71px;height:110px;z-index:4;overflow:visible;pointer-events:none;}
+.share-fuel-hose path {fill:none;stroke-linecap:round;stroke-linejoin:round;}
+.share-hose-dark {stroke:#0e3654;stroke-width:15;filter:drop-shadow(0 3px 3px #0007);}
+.share-hose-outline {stroke:#8adfff;stroke-width:5;opacity:.8;}
+.share-hose-flow {stroke:#ffe7a2;stroke-width:6;stroke-dasharray:15 23;opacity:0;filter:drop-shadow(0 0 6px rgba(255,196,87,.85));}
+.share-flight-scene-pumping .share-hose-flow {opacity:1;animation:shareHoseRush .48s linear infinite;}
+@keyframes shareHoseRush {to{stroke-dashoffset:-38}}
+.share-aircraft-stand {position:absolute;right:0;bottom:33px;width:32%;max-width:305px;height:64%;min-height:128px;z-index:5;}
+.share-aircraft {position:absolute;left:0;bottom:0;width:100%;height:auto;overflow:visible;
+    filter:drop-shadow(0 9px 8px rgba(0,0,0,.55)) drop-shadow(0 0 10px rgba(120,207,251,.28));transform-origin:50% 60%;}
+.share-aircraft .share-propeller {transform-box:fill-box;transform-origin:center;}
+.share-aircraft .share-fuel-port {opacity:.28;transition:opacity .25s;}
+.share-flight-scene-pumping .share-aircraft .share-fuel-port {opacity:1;filter:drop-shadow(0 0 8px #ffdc8c);}
+.share-flight-scene-pumping .share-aircraft {animation:sharePlaneTremble .13s ease-in-out infinite alternate;}
+.share-flight-scene-pumping .share-aircraft .share-propeller {animation:sharePropSpin .13s linear infinite;}
+.share-aircraft.share-flying {animation:sharePlaneDepart 1.48s cubic-bezier(.2,.62,.28,1) forwards!important;}
+.share-aircraft.share-flying .share-propeller {animation:sharePropSpin .085s linear infinite;}
+/* Máy bay chỉ nhận click sau khi tiếp nhiên liệu. */
+.share-aircraft-stand.share-ready {cursor:pointer;pointer-events:auto;touch-action:manipulation;}
+.share-aircraft-stand.share-ready .share-aircraft {transition:filter .28s ease, transform .28s ease;animation:sharePlaneIdle 1.65s ease-in-out infinite alternate;}
+.share-aircraft-stand.share-ready:hover .share-aircraft,
+.share-aircraft-stand.share-ready:focus-visible .share-aircraft {filter:drop-shadow(0 0 16px rgba(174,236,255,.9)) drop-shadow(0 0 24px rgba(255,221,142,.4));}
+.share-aircraft-stand.share-ready:focus-visible {outline:2px solid #96f6ff;outline-offset:5px;border-radius:12px;}
+@keyframes sharePlaneIdle {from{transform:translateY(0)}to{transform:translateY(-3px)}}
+.share-aircraft-stand.share-takeoff {pointer-events:none;}
+/* Ngôi sao nhỏ bên động cơ, lấy cảm hứng hạt sáng tsParticles, thuần CSS không tải CDN. */
+.share-aircraft-stand.share-takeoff::after{content:'✦  ·  ✧';position:absolute;z-index:7;left:-2%;top:56%;color:#ffe4a1;font-size:19px;white-space:nowrap;letter-spacing:5px;pointer-events:none;
+ text-shadow:0 0 9px #ffd580,0 0 24px #ffd580;
+ animation:shareJetTwinkles 1.15s ease-out forwards;}
+@keyframes shareJetTwinkles{0%{opacity:0;transform:translateX(0) scale(.5)}30%{opacity:.95}100%{opacity:0;transform:translateX(-65px) scale(1.3)}}
+
+@keyframes sharePlaneTremble {from{transform:translate(0,0)}to{transform:translate(-1px,-2px)}}
+@keyframes sharePropSpin {to{transform:rotate(360deg)}}
+@keyframes sharePlaneDepart {
+    0% {transform:translate(0,0) rotate(0deg) scale(1);opacity:1;}
+    17% {transform:translate(15px,-5px) rotate(-5deg) scale(1);opacity:1;}
+    34% {transform:translate(110px,-70px) rotate(-16deg) scale(.99);opacity:1;}
+    75% {transform:translate(67vw,-55vh) rotate(-19deg) scale(.69);opacity:1;}
+    100% {transform:translate(110vw,-85vh) rotate(-16deg) scale(.45);opacity:0;}
+}
+.share-flight-status {position:relative;text-align:center;z-index:4;color:#ffe9af;min-height:28px;margin:8px 0 0;
+    font:600 clamp(13px,1.35vw,17px)/1.5 system-ui,sans-serif;text-shadow:0 0 14px rgba(255,199,122,.25);}
+#share-copy-manual {display:none;margin-top:4px;color:#a6e8ff;max-width:90%;overflow-wrap:anywhere;font:14px system-ui,sans-serif;}
+ #share-flight-status:empty {min-height:0;margin:0;visibility:hidden;}
+/* Thông báo sao chép đứng độc lập với cảnh máy bay, không biến mất lúc chuyển cảnh. */
+.tiny-copy-toast {
+ position:fixed;left:50%;top:clamp(15px,5vh,45px);transform:translate(-50%,-12px);
+ z-index:10000;max-width:min(92vw,520px);box-sizing:border-box;
+ padding:11px 22px;border:1px solid rgba(169,241,255,.55);border-radius:999px;
+ background:rgba(5,25,43,.91);color:#d8fff6;
+ font:700 clamp(14px,1.5vw,18px)/1.4 system-ui,sans-serif;
+ text-align:center;text-shadow:0 0 10px rgba(117,246,220,.45);
+ box-shadow:0 8px 26px rgba(0,0,0,.36),0 0 24px rgba(80,225,215,.15);
+ opacity:0;visibility:hidden;pointer-events:none;
+ transition:opacity .28s ease,transform .28s ease,visibility .28s;
+}
+.tiny-copy-toast.show {opacity:1;visibility:visible;transform:translate(-50%,0);}
+.tiny-copy-toast.copy-failed {border-color:rgba(255,209,147,.75);color:#fff0cb;pointer-events:auto;border-radius:18px;}
+.tiny-copy-toast a {display:block;color:#9cf2ff;overflow-wrap:anywhere;margin-top:6px;font-size:.85em;}
+.share-finale-active #khung-mat {opacity:0!important;visibility:hidden!important;pointer-events:none!important;transition:opacity .7s ease!important;}
+/* Let the old question actually fade out during the eye movement. */
+.share-finale-active .text-layer {opacity:0!important;visibility:visible!important;transition:opacity .8s ease!important;}
+.share-finale-active #text-13 {opacity:0!important;visibility:visible!important;transition:opacity .8s ease!important;}
+@media(max-width:650px) {
+ #share-flight-scene {justify-content:center;padding:22px 10px 35px;}
+ .share-flight-heading {margin:0 0 10px;}
+ .share-flight-heading h2 {font-size:clamp(22px,5.6vw,32px);line-height:1.36;letter-spacing:.01em;}
+ .share-flight-heading .share-flight-small {font-size:10px;margin-bottom:9px;letter-spacing:.15em;}
+ .share-tiny {width:230px;height:94px;margin:2px auto 3px;}
+ .share-tiny-eyes {--tiny-eye-size:67px;--tiny-eye-gap:55px;}
+ .share-tiny-blush {font-size:14px;}
+ .share-tiny.share-tiny-look .share-tiny-eye-wrap:first-child {transform:translate(-17px,12px) rotate(-10deg);}
+ .share-tiny.share-tiny-look .share-tiny-eye-wrap:last-child {transform:translate(-12px,12px) rotate(-8deg);}
+ .share-flight-device {width:min(98vw,500px);height:clamp(205px,34vh,270px);}
+ .share-fuel-button {left:4%;width:32%;height:clamp(150px,70%,215px);border-radius:17px;padding:4px;}
+ .share-fuel-nozzle {left:calc(4% + 32% - 3px);bottom:calc(33px + clamp(150px,70%,215px)*.49);width:15px;height:12px;}
+ .share-fuel-hose {left:calc(4% + 32% + 5px);right:28%;bottom:68px;height:105px;}
+ .share-aircraft-stand {right:-1%;width:34%;height:58%;}
+ .share-fuel-words {left:6px;right:6px;padding:8px 0;}
+ .share-fuel-words strong {font-size:clamp(17px,5vw,25px);}
+ .share-fuel-words small {font-size:10px;}
+}
+@media(max-height:560px) and (min-width:650px) {
+ #share-flight-scene {padding-top:8px;padding-bottom:7px;}
+ .share-flight-heading h2 {font-size:clamp(22px,3.1vw,36px);line-height:1.2;}
+ .share-flight-heading .share-flight-small {margin-bottom:4px;}
+ .share-tiny {height:76px;margin:0 auto;}
+ .share-tiny-eyes {--tiny-eye-size:52px;--tiny-eye-gap:52px;}
+ .share-tiny-blush {font-size:12px;}
+ .share-flight-device {height:clamp(165px,37vh,215px);margin-top:0;}
+ .share-fuel-button {height:clamp(125px,76%,170px);}
+}
+@media(max-width:650px) and (max-height:680px) {
+ #share-flight-scene {padding:7px 7px;}
+ .share-flight-heading h2 {font-size:clamp(18px,4.8vw,25px);line-height:1.2;}
+ .share-tiny {height:72px;}
+ .share-tiny-eyes {--tiny-eye-size:52px;--tiny-eye-gap:47px;}
+ .share-tiny-blush {font-size:11px;}
+ .share-flight-device {height:clamp(165px,34vh,220px);}
+ .share-fuel-button {height:clamp(120px,70%,180px);}
+}
+
+/* Text and flight props arrive progressively; the moving Tiny eyes stay fully opaque. */
+#share-flight-scene::before {opacity:0; transition:opacity .95s ease;}
+#share-flight-scene.share-visible::before {opacity:1;}
+#share-flight-scene .share-flight-heading,
+#share-flight-scene .share-flight-device,
+#share-flight-scene .share-flight-status {opacity:0;transform:translateY(13px);transition:opacity .8s ease .27s,transform .85s cubic-bezier(.2,.8,.25,1) .27s;}
+#share-flight-scene.share-visible .share-flight-heading,
+#share-flight-scene.share-visible .share-flight-device,
+#share-flight-scene.share-visible .share-flight-status {opacity:1;transform:translateY(0);}
+/* Share finale: CONTINUE the actual question-scene Tiny eyes, do not hide/redraw them. */
+.share-finale-active #khung-mat {opacity:1!important;visibility:visible!important;pointer-events:none!important;}
+.share-finale-active #share-flight-scene.share-visible {transition:visibility 0s,opacity 0s!important;}
+#share-tiny #khung-mat {
+  --real-eye:clamp(66px,7.5vw,104px);
+  display:flex!important; position:relative!important; z-index:10!important;
+  align-items:flex-start!important; justify-content:center!important;
+  gap:clamp(35px,6vw,70px)!important;
+  width:max-content!important;height:calc(var(--real-eye) + 26px)!important;
+  margin:0 auto!important; opacity:1!important;visibility:visible!important;
+  animation:none!important; transform:none;transition:none!important;
+}
+#share-tiny #khung-mat .truc-x {
+  width:var(--real-eye)!important;height:calc(var(--real-eye) + 26px)!important;
+  flex:0 0 var(--real-eye); position:relative!important;
+  animation:none!important;transition:transform .68s cubic-bezier(.2,.85,.26,1)!important;
+  transform:none;
+}
+#share-tiny #khung-mat .con-mat {
+  width:var(--real-eye)!important;height:var(--real-eye)!important;
+  box-sizing:border-box!important;border-radius:25%!important;
+  background:linear-gradient(130deg,#81ffff 0%,#00f4ee 36%,#00e9ec 75%,#beffff 100%)!important;
+  box-shadow:0 0 20px 6px rgba(0,255,255,.45),0 0 38px 12px rgba(0,232,255,.26),inset 0 0 20px rgba(242,255,255,.53)!important;
+  opacity:1!important;visibility:visible!important;overflow:hidden!important;
+  animation:none!important;transition:transform .65s cubic-bezier(.2,.85,.26,1)!important;
+  transform:scaleY(1)!important;transform-origin:50% 50%!important;
+}
+#share-tiny #khung-mat .ma-hong {
+  display:block!important;position:absolute!important;
+  top:calc(var(--real-eye) + 4px)!important;bottom:auto!important;
+  color:#ffa4cb!important;opacity:.95!important;
+  font-size:clamp(13px,1.65vw,22px)!important;
+  transform:translateX(-50%)!important;letter-spacing:2px!important;
+  z-index:13!important;transition:none!important;
+}
+#share-tiny #khung-mat #moi-robot,
+#share-tiny #khung-mat .mat-cong,
+#share-tiny #khung-mat .reference-wink-svg,
+#share-tiny #khung-mat .question-hold-wink,
+#share-tiny #khung-mat .question-eye-wink {display:none!important;opacity:0!important;}
+/* Looking towards the left-hand Agree fuel can from the instant scene appears. */
+/* The two ORIGINAL eyes always look together towards the Agree button. */
+#share-tiny.share-tiny-look #khung-mat .truc-x {
+  transform:translate(-20px,18px) rotate(-15deg)!important;
+}
+#share-tiny.share-tiny-look #khung-mat .con-mat {transform:scaleY(.88)!important;}
+#share-tiny.share-tiny-blink #khung-mat .con-mat {transform:scaleY(.12)!important;}
+#share-tiny.share-tiny-cheer #khung-mat .truc-x:first-child {transform:translate(-5px,-4px) rotate(-4deg)!important;}
+#share-tiny.share-tiny-cheer #khung-mat .truc-x:not(:first-child) {transform:translate(5px,-4px) rotate(4deg)!important;}
+#share-tiny #khung-mat .con-mat.tiny-actual-morph {
+  background:transparent!important;box-shadow:none!important;
+  border-radius:0!important;overflow:visible!important;
+  transform:scaleY(1)!important;
+}
+#share-tiny #khung-mat .tiny-morph-svg {position:absolute;inset:0;width:100%;height:100%;display:block;overflow:visible;filter:drop-shadow(0 0 8px rgba(0,255,255,.91)) drop-shadow(0 0 14px rgba(0,225,255,.47));}
+#share-tiny #khung-mat .tiny-morph-svg path {fill:#56ffff;stroke:#c6ffff;stroke-width:1.2;stroke-linejoin:round;}
+@media(max-width:650px){
+  #share-tiny #khung-mat {--real-eye:67px;gap:55px!important;}
+  /* Không để đầu máy bay/chong chóng chạm mép màn hình điện thoại. */
+  .share-aircraft-stand {right:4%!important;width:34%!important;}
+  #share-tiny.share-tiny-look #khung-mat .truc-x {
+    transform:translate(-14px,13px) rotate(-15deg)!important;
+  }
+}
+@media(max-height:560px) and (min-width:650px){#share-tiny #khung-mat {--real-eye:52px;gap:52px!important;}}
+@media(max-width:650px) and (max-height:680px){#share-tiny #khung-mat {--real-eye:52px;gap:47px!important;}}

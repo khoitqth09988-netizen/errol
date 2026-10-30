@@ -1,0 +1,33 @@
+/* extracted from index.html <style id="tiny-v11-mobile-question-arc-visible"> */
+
+/* Sửa selector: mắt phải là DIV cuối cùng, KHÔNG phải child cuối vì sau nó còn SVG nụ cười. */
+.tiny-mobile #khung-mat.question-one-eye > .truc-x:last-of-type > svg.mat-cong {
+  display:block !important;
+  visibility:visible !important;
+  width:160px !important;
+  height:70px !important;
+  left:0 !important;
+  top:91px !important;
+  overflow:visible !important;
+  pointer-events:none !important;
+  z-index:20 !important;
+  transform-origin:80px 44px !important;
+  animation:none !important;
+  filter:drop-shadow(0 0 6px rgba(0,255,255,.80)) !important;
+}
+.tiny-mobile #khung-mat.question-one-eye > .truc-x:last-of-type > svg.mat-cong path {
+  opacity:1 !important;
+  fill:none !important;
+  stroke:#9cffff !important;
+  stroke-width:12px !important;
+  stroke-linecap:round !important;
+  stroke-linejoin:round !important;
+}
+@media(max-width:600px){
+  .tiny-mobile #khung-mat.question-one-eye > .truc-x:last-of-type > svg.mat-cong {
+    width:100px !important;
+    height:43.75px !important;
+    top:56.875px !important;
+    transform-origin:50% 50% !important;
+  }
+}

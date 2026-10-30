@@ -1,0 +1,42 @@
+/* extracted from index.html <style id="tiny-smooth-transitions-v3"> */
+
+/* Tiny Smooth Transitions V3 – isolated decorative work, not Tiny's eyes or words. */
+.tiny-scene-transition #uiverse-starfield #stars,
+.tiny-scene-transition #uiverse-starfield #stars2,
+.tiny-scene-transition #uiverse-starfield #stars3,
+.tiny-scene-transition .tiny-bird,
+.tiny-scene-transition .tiny-health-butterfly,
+.tiny-scene-transition .tiny-meadow-blossom,
+.tiny-scene-transition .tiny-meadow-butterfly {
+    animation-play-state:paused !important;
+}
+.tiny-mobile .reference-wink-trail.heart-mode,
+.tiny-mobile .reference-wink-trail.star-mode {
+    box-shadow:none !important;
+}
+.tiny-mobile .reference-wink-star.heart-mode,
+.tiny-mobile .reference-wink-star.star-mode {
+    filter:drop-shadow(0 0 7px rgba(255,180,215,.68)) !important;
+}
+/* No CPU/GPU-intensive glow repaint while a full-screen scene is crossfading. */
+.tiny-mobile.tiny-scene-transition #decor-beauty .tiny-orbit-star,
+.tiny-mobile.tiny-scene-transition #decor-beauty .tiny-orbit-trail {
+    animation-play-state:paused !important;
+}
+.tiny-mobile #text-7, .tiny-mobile #text-8,
+.tiny-mobile #text-9, .tiny-mobile #text-12, .tiny-mobile #text-13 {
+    text-shadow:0 0 9px rgba(240,250,255,.72),0 0 15px rgba(135,222,255,.32) !important;
+}
+
+/* Luck/question: preserve primary stars but avoid compositing two extra full-screen shadow layers. */
+.luck-scene #uiverse-starfield #stars2,
+.luck-scene #uiverse-starfield #stars3,
+.question-scene-body #uiverse-starfield #stars2,
+.question-scene-body #uiverse-starfield #stars3 {display:none !important;}
+/* Question doesn't need the huge continuously-moving Uiverse star shadow texture. */
+.question-scene-body #uiverse-starfield #stars,
+.question-scene-body #uiverse-starfield #stars2,
+.question-scene-body #uiverse-starfield #stars3 {animation-play-state:paused !important;}
+.tiny-scene-transition #tiny-shop-scene .shop-magical-star,
+.tiny-scene-transition #tiny-shop-scene .shop-magic-petal,
+.tiny-scene-transition #tiny-shop-scene .shop-aurora {animation-play-state:paused !important;}

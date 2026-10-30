@@ -1,0 +1,53 @@
+/* extracted from index.html <style id="tiny-question-waguri-wink-final"> */
+
+/* Bỏ toàn bộ nét cong CSS cũ; trạng thái nhắm giờ do SVG Waguri thật đảm nhiệm. */
+#khung-mat.question-one-eye .mat-cong,
+#khung-mat.wish-clover.wish-luck.question-one-eye .mat-cong {
+    opacity:0 !important;
+    visibility:hidden !important;
+}
+#khung-mat.question-one-eye .question-hold-wink {
+    opacity:1;
+}
+/* Khi reference-wink-active, chỉ SVG hiện; má hồng vẫn giữ nguyên. */
+#khung-mat.question-one-eye .truc-x.reference-wink-active .con-mat {
+    opacity:0 !important;
+}
+#khung-mat.question-one-eye .truc-x.reference-wink-active .ma-hong {
+    opacity:.97 !important;
+    z-index:8;
+}
+/* Đung đưa nhẹ, không phá góc chéo đã yêu cầu. */
+#khung-mat.wish-clover.wish-luck.question-one-eye {
+    animation: tinyQuestionWaguriSway 4.6s ease-in-out .24s infinite !important;
+}
+@keyframes tinyQuestionWaguriSway {
+    0%,100% { transform:translate(0,7px) rotate(14deg) scale(.97); }
+    25% { transform:translate(-2px,5px) rotate(13.2deg) scale(.971); }
+    50% { transform:translate(1px,9px) rotate(14.8deg) scale(.969); }
+    75% { transform:translate(2px,6px) rotate(13.5deg) scale(.971); }
+}
+/* Chữ dịu hơn bản chói trước. */
+#text-13 {
+    text-shadow:0 0 7px rgba(255,255,255,.36),0 0 16px rgba(190,218,255,.11) !important;
+}
+#text-13 .question-blue-words {
+    text-shadow:
+      0 0 5px rgba(225,249,255,.62),
+      0 0 12px rgba(101,196,255,.46),
+      0 0 24px rgba(49,145,255,.27),
+      0 0 48px rgba(27,99,240,.13) !important;
+}
+#question-stage.active::before { opacity:.54 !important; }
+#question-stage.active .question-blue-rays { opacity:.62 !important; }
+@media screen and (max-width:700px) and (orientation:portrait) {
+  #khung-mat.wish-clover.wish-luck.question-one-eye {
+      animation:tinyQuestionWaguriSwayMobile 4.6s ease-in-out .24s infinite !important;
+  }
+  @keyframes tinyQuestionWaguriSwayMobile {
+      0%,100% { transform:translate(0,-4dvh) rotate(13deg) scale(.68); }
+      25% { transform:translate(-1px,calc(-4dvh - 1px)) rotate(12.3deg) scale(.681); }
+      50% { transform:translate(1px,calc(-4dvh + 2px)) rotate(13.8deg) scale(.679); }
+      75% { transform:translate(2px,calc(-4dvh - 1px)) rotate(12.6deg) scale(.681); }
+  }
+}

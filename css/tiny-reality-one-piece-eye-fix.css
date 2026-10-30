@@ -1,0 +1,55 @@
+/* extracted from index.html <style id="tiny-reality-one-piece-eye-fix"> */
+
+/* Eyes are still the ORIGINAL Tiny .con-mat nodes. The single SVG path IS the
+   silhouette: no overlayed rounds, scalloped clip-path or separate border. */
+#tiny-reality-eye-host #khung-mat .con-mat.reality-morphing,
+#tiny-reality-eye-host.cute-ready #khung-mat .con-mat.reality-morphing {
+    background: transparent !important;
+    box-shadow: none !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    clip-path: none !important;
+    -webkit-clip-path: none !important;
+    overflow: visible !important;
+    animation: none !important;
+    filter: none !important;
+}
+#tiny-reality-eye-host #khung-mat .con-mat.reality-morphing::before,
+#tiny-reality-eye-host #khung-mat .con-mat.reality-morphing::after {
+    content: none !important;
+    display: none !important;
+    opacity: 0 !important;
+}
+#tiny-reality-eye-host #khung-mat .con-mat .reality-one-piece-svg {
+    display: block !important;
+    position: absolute !important;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+    pointer-events: none;
+}
+#tiny-reality-eye-host #khung-mat .con-mat .reality-one-piece-body {
+    stroke: #baffff;
+    stroke-width: 1.55;
+    stroke-linejoin: round;
+    filter: drop-shadow(0 0 4px rgba(119, 255, 255, .62))
+            drop-shadow(0 0 10px rgba(0, 232, 248, .52));
+}
+#tiny-reality-eye-host #khung-mat .con-mat .reality-one-piece-reflections {
+    opacity: 0;
+    will-change: opacity;
+}
+#tiny-reality-eye-host #khung-mat .con-mat .reality-one-piece-reflections .main-glint {
+    fill: #fff;
+    filter: drop-shadow(0 0 3px rgba(255, 255, 255, .98));
+}
+#tiny-reality-eye-host #khung-mat .con-mat .reality-one-piece-reflections .tiny-glint {
+    fill: #fff;
+    filter: drop-shadow(0 0 2px rgba(255, 255, 255, .82));
+}
+/* Only one continuous smooth edge; the full eye, including its cyan fill,
+   bulges while Tiny approaches. No idle edge-wobble afterward. */
+@media (prefers-reduced-motion: reduce) {
+    #tiny-reality-eye-host #khung-mat .reality-one-piece-svg {transition:none!important}
+}

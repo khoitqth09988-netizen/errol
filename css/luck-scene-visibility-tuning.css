@@ -1,0 +1,65 @@
+/* extracted from index.html <style id="luck-scene-visibility-tuning"> */
+
+/* Chỉ thay đổi cảnh chúc may mắn. Không tác động những cảnh trước. */
+#text-12 {
+    width: min(92vw, 1120px);
+    left: 50%;
+    top: 9.1%;
+    transform: translateX(-50%);
+    font-size: clamp(29px, 2.6vw, 43px);
+    letter-spacing: clamp(.8px, .16vw, 2px);
+    line-height: 1.36;
+    padding-inline: 18px;
+    text-wrap: balance;
+    text-shadow: 0 0 12px rgba(255,255,255,.67), 0 0 26px rgba(180,255,200,.17);
+}
+#text-12 .luck-green-words {
+    color: #73ff96;
+    text-shadow: 0 0 10px rgba(97,255,137,.94), 0 0 26px rgba(40,229,95,.54);
+}
+/* Nét bốn lá nổi rõ hơn nhưng vẫn nằm SAU mắt Tiny. */
+#luck-stage .luck-bg-clover {
+    left: 51%; top: 55%;
+    width: min(60vw, 465px);
+}
+#luck-stage.active .luck-bg-clover {
+    opacity: .69;
+    filter: drop-shadow(0 0 11px rgba(114,255,166,.65))
+            drop-shadow(0 0 32px rgba(48,230,107,.33));
+}
+#luck-stage .luck-bg-clover .luck-bg-svg path:not([style*="fill:none"]) {
+    fill: rgba(21,82,47,.37);
+    stroke: #87ffae;
+    stroke-width: 2.6px;
+}
+#luck-stage .luck-bg-clover .luck-bg-svg path[style*="fill:none"] {
+    fill: none;
+    stroke: #74f79e;
+    stroke-width: 2.6px;
+}
+#luck-stage .luck-bg-clover .luck-bg-svg {
+    filter: drop-shadow(0 0 5px rgba(118,255,171,.75))
+            drop-shadow(0 0 17px rgba(50,240,108,.43));
+}
+@media (max-width:700px) and (orientation:portrait) {
+    #text-12 {
+        width: 96vw;
+        top: 7.3%;
+        font-size: clamp(22px, 5.5vw, 29px);
+        line-height:1.4;
+        letter-spacing:.7px;
+        padding-inline:12px;
+    }
+    #luck-stage .luck-bg-clover {
+        width: min(74vw, 320px);
+        left: 50%; top: 56%;
+    }
+    #luck-stage.active .luck-bg-clover { opacity:.61; }
+}
+@media (orientation:landscape) and (max-height:600px) and (pointer:coarse) {
+    #text-12 {
+        top:4%;
+        font-size:clamp(22px, 4.8vh, 31px);
+        line-height:1.28;
+    }
+}

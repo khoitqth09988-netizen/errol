@@ -1,0 +1,14 @@
+/* extracted from index.html <style id="tiny-question-absolute-angle-blink-fix"> */
+
+/* Chỉ cảnh câu hỏi: loại bỏ xoay 14deg từ mọi CSS/animation cũ. */
+#khung-mat.question-one-eye,
+#khung-mat.wish-clover.wish-luck.question-one-eye {
+  animation: none !important;
+  transform: translateY(-1vh) rotate(0deg) scale(.96) !important;
+}
+#khung-mat.question-one-eye .truc-x { animation: none !important; }
+#khung-mat.question-one-eye .truc-x .con-mat { animation: none !important; }
+/* Cho nét cong gốc xuất hiện đúng lúc khép mắt phải. */
+#khung-mat.question-one-eye .truc-x:last-child > .mat-cong {
+  visibility: visible !important;
+}

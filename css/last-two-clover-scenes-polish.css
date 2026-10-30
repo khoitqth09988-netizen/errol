@@ -1,0 +1,58 @@
+/* extracted from index.html <style id="last-two-clover-scenes-polish"> */
+
+/* Center the full pair, not just the individual eyes; do not affect the preceding scene. */
+#khung-mat.wish-clover.gift-centered,
+#khung-mat.wish-clover.wish-luck {
+    transform: translate(0, 0) scale(.95) !important;
+    gap: 120px !important;
+}
+#khung-mat.wish-clover.gift-centered .truc-x,
+#khung-mat.wish-clover.wish-luck .truc-x { transform: translate(0,0) !important; }
+#khung-mat.wish-clover.gift-centered .ma-hong,
+#khung-mat.wish-clover.wish-luck .ma-hong {
+    left:50%; top:175px; transform:translateX(-50%) !important;
+}
+/* Soft translucent green clover, off to the right and below the eyes; it does not obscure them. */
+#luck-stage .luck-bg-clover {
+    left:76%; top:72%;
+    width:min(32vw,365px);
+    transform:translate(-50%,-50%) rotate(90deg) scale(.92);
+    transform-origin:50% 50%;
+}
+#luck-stage.active .luck-bg-clover {
+    opacity:.83;
+    transform:translate(-50%,-50%) rotate(90deg) scale(1);
+    filter:drop-shadow(0 0 12px rgba(95,255,149,.62)) drop-shadow(0 0 26px rgba(63,238,117,.32));
+}
+#luck-stage .luck-bg-clover .luck-bg-svg path:not([style*="fill:none"]) {
+    fill:rgba(49,197,100,.19) !important;
+    stroke:rgba(144,255,176,.92) !important;
+    stroke-width:2.8px;
+}
+#luck-stage .luck-bg-clover .luck-bg-svg path[style*="fill:none"] {
+    fill:none !important; stroke:rgba(132,255,169,.86) !important;
+}
+#luck-stage .luck-bg-clover .luck-bg-svg {
+    filter:drop-shadow(0 0 7px rgba(105,255,155,.75)) drop-shadow(0 0 18px rgba(62,225,112,.45));
+}
+@media screen and (max-width:700px) and (orientation:portrait) {
+    #khung-mat.wish-clover.gift-centered,
+    #khung-mat.wish-clover.wish-luck {
+        transform:translate(0, -5dvh) scale(.68) !important;
+        gap:70px !important;
+    }
+    #khung-mat.wish-clover.gift-centered .ma-hong,
+    #khung-mat.wish-clover.wish-luck .ma-hong {
+        top:164px !important; left:50%; transform:translateX(-50%) !important;
+        font-size:1.18rem; letter-spacing:2px;
+    }
+    #luck-stage .luck-bg-clover { left:61%; top:72%; width:min(53vw,222px); }
+    #luck-stage.active .luck-bg-clover {opacity:.75;}
+}
+@media screen and (orientation:landscape) and (max-height:600px) and (pointer:coarse) {
+    #khung-mat.wish-clover.gift-centered,
+    #khung-mat.wish-clover.wish-luck {
+        transform:translate(0,0) scale(.60) !important; gap:110px !important;
+    }
+    #luck-stage .luck-bg-clover {left:75%; top:63%; width:min(23vw,240px);}
+}

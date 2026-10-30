@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0d1420"/>
+      <stop offset="1" stop-color="#05070a"/>
+    </linearGradient>
+    <radialGradient id="halo" cx="50%" cy="46%" r="58%">
+      <stop offset="0" stop-color="#12f5ff" stop-opacity=".30"/>
+      <stop offset="1" stop-color="#12f5ff" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="blur" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="1.7"/>
+    </filter>
+  </defs>
+  <rect width="64" height="64" rx="14" fill="url(#bg)"/>
+  <rect width="64" height="64" rx="14" fill="url(#halo)"/>
+  <g fill="none" stroke="#12f5ff" stroke-width="5.4" stroke-linecap="round"
+     stroke-linejoin="round" filter="url(#blur)">
+    <path d="M13 41 L21.5 28 L30 41"/>
+    <path d="M34 41 L42.5 28 L51 41"/>
+  </g>
+  <g fill="none" stroke="#c9f6ff" stroke-width="3.8" stroke-linecap="round"
+     stroke-linejoin="round">
+    <path d="M13 41 L21.5 28 L30 41"/>
+    <path d="M34 41 L42.5 28 L51 41"/>
+  </g>
+  <path d="M55.5 19.4 C52.4 15.6 52.4 13.2 54.2 12.7 C55.1 12.5 55.5 13.1 55.5 13.6
+           C55.5 13.1 55.9 12.5 56.8 12.7 C58.6 13.2 58.6 15.6 55.5 19.4 Z" fill="#ff7fb0"/>
+</svg>

@@ -1,0 +1,41 @@
+/* extracted from index.html <style id="tiny-beauty-mobile-v5-one-scene"> */
+
+/* V5: Beauty only, smartphone/tablet only. Desktop and other scenes remain as V4. */
+.tiny-mobile #decor-beauty .tiny-upgrade-motif,
+.tiny-mobile #decor-beauty .tiny-beauty-garland {display:none!important}
+.tiny-mobile #decor-beauty .tiny-decor-beauty {filter:none!important}
+/* Four petals only, one traversal. They are removed from DOM after exiting the view. */
+.tiny-mobile #decor-beauty .tiny-beauty-petal {
+  animation:tinyPetalFall var(--tiny-v5-duration,7.5s) linear var(--tiny-v5-delay,0s) 1 both!important;
+  text-shadow:none!important;filter:none!important;
+  will-change:transform,opacity;
+}
+.tiny-mobile #decor-beauty .tiny-beauty-glint {
+  animation:none!important;opacity:.65!important;transform:none!important;
+  text-shadow:0 0 5px rgba(255,210,240,.38)!important;filter:none!important;
+}
+.tiny-mobile #decor-beauty .tiny-beauty-firefly {
+  animation:tinyFireflyDrift 8s ease-in-out infinite alternate!important;
+  opacity:.63!important;background:#f7d5f4!important;
+  box-shadow:none!important;filter:none!important;
+}
+/* Meadow: static flowers and horizon, no repeated SVG filtering or sway. */
+.tiny-mobile #decor-beauty .tiny-meadow-scene,
+.tiny-mobile #decor-beauty .tiny-meadow-scene * {
+  filter:none!important;animation:none!important;
+}
+.tiny-mobile #decor-beauty .tiny-meadow-scene .tiny-horizon-rim {opacity:.72}
+/* Two gently drawn side bouquets, one small butterfly and static glimmers. */
+.tiny-mobile #beauty-stage .ring {box-shadow:none!important;will-change:opacity,transform}
+.tiny-mobile #beauty-stage .ring::before,
+.tiny-mobile #beauty-stage .ring::after {animation:none!important;text-shadow:none!important}
+.tiny-mobile #beauty-stage .wish-twinkle {animation:none!important;text-shadow:0 0 5px rgba(255,220,187,.34)!important;opacity:.85!important}
+.tiny-mobile #beauty-stage .butterfly-wrap.left {
+  animation:floatButterfly 6.5s ease-in-out infinite alternate!important;
+  opacity:.80!important;filter:none!important;
+}
+.tiny-mobile #beauty-stage .butterfly-wrap .wing-pair {animation:wingFlap 1.25s ease-in-out infinite alternate!important}
+.tiny-mobile #beauty-stage:not(.hien-thi) *,
+.tiny-mobile #decor-beauty:not(.is-visible) * {animation-play-state:paused!important}
+/* Shorten overdraw without removing the crossfade itself. */
+.tiny-mobile #decor-beauty {transition:opacity .38s ease-out,visibility .38s!important}

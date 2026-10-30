@@ -1,0 +1,199 @@
+/* extracted from index.html <style id="tiny-mobile-branch"> */
+
+/* ============================================================
+   NHÁNH HIỂN THỊ RIÊNG CHO ĐIỆN THOẠI
+   Chỉ chạy khi vùng hiển thị nhỏ. Laptop/desktop giữ nguyên 100%
+   HTML, JS, nhạc, video, đồng bộ lyric và mọi phân cảnh gốc.
+   ============================================================ */
+@media screen and (max-width: 700px) and (orientation: portrait) {
+    :root { --anh-cao: 51dvh; }
+    html, body { width: 100%; height: 100%; }
+    body { height: 100dvh; }
+
+    /* Mỗi câu chúc nằm trong phần đầu, không chèn vào mắt/video. */
+    .text-layer {
+        box-sizing: border-box;
+        padding-inline: 16px;
+        letter-spacing: clamp(.6px, .35vw, 1.5px);
+        line-height: 1.4;
+        overflow-wrap: break-word;
+    }
+    #text-1 { font-size: clamp(26px, 7.6vw, 38px); }
+    #text-2 { font-size: clamp(24px, 7vw, 33px); bottom: 13%; }
+    #text-3 { font-size: clamp(20px, 5.6vw, 27px); top: 9%; }
+    #text-4 { font-size: clamp(24px, 7.2vw, 34px); bottom: 11%; }
+    #text-5 { top: 6.5%; left: 0; width: 100%; font-size: clamp(19px, 5.6vw, 27px); }
+    #text-6 { top: 9%; font-size: clamp(23px, 6.2vw, 32px); }
+    #text-7 { top: 7.5%; font-size: clamp(20px, 5.5vw, 27px); }
+    #text-8, #text-9 {
+        top: 6%; left: 0; width: 100%;
+        font-size: clamp(21px, 5.65vw, 28px);
+        line-height: 1.38; letter-spacing: 1px;
+        padding-inline: clamp(14px, 4vw, 22px);
+    }
+
+    /* Tiny ở phần trên giữa; mắt và má hồng vẫn cùng hệ tọa độ. */
+    #khung-mat {
+        gap: clamp(38px, 11vw, 56px);
+    }
+    #khung-mat.canh-muon {
+        gap: 48px;
+        transform: translate(-8vw,-5.5dvh) scale(.94);
+    }
+    #khung-mat.canh-chuc {
+        gap: 46px;
+        transform: translate(-4vw,-16dvh) scale(.93);
+    }
+    #khung-mat.wish-beauty {
+        gap: clamp(38px, 11vw, 54px);
+        transform: translate(0,-5.5dvh) scale(.98);
+    }
+    #khung-mat.wish-smile {
+        gap: clamp(38px, 11vw, 54px);
+        transform: translate(-.5vw,-18dvh) scale(.88);
+    }
+    #khung-mat.wish-smile .ma-hong { opacity: .95 !important; }
+
+    /* Ảnh từ cảnh 20/10 chiếm phía dưới, để mắt và lời chúc ở trên. */
+    #anh-hai-nguoi { right: -3vw; height: var(--anh-cao); max-width: 78vw; }
+    #laCanvas { width: 88vw; }
+    #co-hoa { max-width: 100vw; }
+
+    /* Cảnh sức khỏe: tim bên phải, giữ vùng tối cho mắt và tiêu đề. */
+    #woman-scene {
+        background-size: 68vw auto;
+        background-position: 50% calc(100% - 4px);
+        background-repeat: no-repeat;
+    }
+    #woman-scene.hien-thi {
+        background-size: 74vw auto;
+        background-position: 50% calc(100% - 2px);
+    }
+    #woman-scene::before {
+        background: radial-gradient(ellipse 86vw 54dvh at 50% 71%,
+            rgba(255,72,76,.34),rgba(245,48,60,.18) 30%,rgba(210,26,42,.08) 58%,transparent 100%);
+    }
+
+    /* Ảnh GỐC toàn thân cho điện thoại: không dùng ảnh ngang đã crop. */
+    #woman-scene,
+    #woman-scene.hien-thi {
+        background-image: none !important;
+        background-color: transparent !important;
+        background-size: initial !important;
+        transform: none !important;
+        overflow: visible;
+    }
+    #woman-scene #woman-complete-mobile {
+        display: block;
+        position: absolute;
+        box-sizing: border-box;
+        right: 1vw;
+        bottom: 1.8dvh;
+        height: min(54dvh, 530px);
+        width: auto;
+        max-width: 96vw;
+        object-fit: contain;
+        object-position: center bottom;
+        opacity: 0;
+        transform: translateY(12px) scale(.97);
+        transform-origin: center bottom;
+        transition: opacity 1.7s ease-in-out, transform 2.4s cubic-bezier(.22,1,.36,1);
+        pointer-events: none;
+        filter: drop-shadow(0 0 8px rgba(248,245,255,.12));
+    }
+    #woman-scene.hien-thi #woman-complete-mobile {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+    /* Tâm sáng đỏ đi cùng trái tim được đưa vào đúng khu vực áo. */
+    #woman-scene::before {
+        background: radial-gradient(ellipse 54vw 27dvh at 64% 79%,
+            rgba(255,70,75,.26) 0%, rgba(240,35,52,.16) 28%,
+            rgba(215,25,43,.065) 62%, transparent 100%);
+    }
+
+    /* Cảnh xinh đẹp: vòng sáng ôm Tiny, hoa mọc từ các cạnh. */
+    #beauty-stage .ring { top: 46%; width: 90vw; }
+    .wish-floral { width: 35vw; height: 48dvh; bottom: -12px; }
+    .wish-floral.left { left: -18px; }
+    .wish-floral.right { right: -18px; }
+    .butterfly-wrap { width: 52px; }
+    .butterfly-wrap.left { left: 6%; top: 33%; }
+    .butterfly-wrap.right { right: 5%; top: 39%; }
+
+    /* Cảnh nụ cười: Tiny phía trên, Waguri phía dưới bên phải. */
+    #smile-stage .waguri-figure {
+        width: clamp(195px, 61vw, 278px);
+        height: auto; max-width: none;
+        right: -2vw; bottom: -1dvh;
+        object-fit: contain;
+    }
+    #smile-stage .waguri-aura {
+        right: -24vw; bottom: -10dvh;
+        width: 94vw; height: 58dvh;
+    }
+    #smile-stage .smile-ornament { width: 32vw; height: 36dvh; bottom: 0; }
+    #smile-stage .smile-ornament.left { left: -5vw; }
+    #smile-stage .smile-ornament.right { right: -8vw; opacity: .20; }
+
+    /* Lời hát nằm trong cột trái ở phía dưới, không chặn mắt Tiny. */
+    #tiny-lyric-zone {
+        left: 3%; top: 67%; width: 47%; height: 24%;
+    }
+    #tiny-lyric-zone .lyric-line {
+        font-size: clamp(15px, 4.35vw, 20px);
+        line-height: 1.30; letter-spacing: 0;
+        min-height: 42%;
+        text-shadow: 0 0 7px rgba(255,197,220,.9), 0 0 16px rgba(255,138,195,.55);
+    }
+    #tiny-lyric-zone .lyric-line:first-child { top: 1%; }
+    #tiny-lyric-zone .lyric-line:last-child { top: 53%; }
+    #tiny-lyric-zone .lyric-line.compact { font-size: clamp(15px, 4.1vw, 19px); }
+    #music-wait-hint { max-width: 86vw; bottom: 5%; }
+}
+
+/* Nhánh điện thoại xoay ngang: giữ bố cục ngang rộng giống laptop,
+   thu kích thước những thành phần lớn vừa chiều cao thấp. */
+@media screen and (orientation: landscape) and (max-height: 600px) and (pointer: coarse) {
+    .text-layer { box-sizing: border-box; padding: 0 14px; letter-spacing: 1.4px; }
+    #text-1 { font-size: clamp(28px, 5.4vh, 42px); }
+    #text-2, #text-4 { font-size: clamp(24px, 5vh, 34px); bottom: 6%; }
+    #text-3, #text-5, #text-6, #text-7 { font-size: clamp(19px, 4.8vh, 28px); top: 5%; }
+    #text-5 { width: 57%; }
+    #text-8, #text-9 { font-size: clamp(20px, 5.6vh, 28px); top: 4%; }
+    #khung-mat { transform: scale(.63); }
+    #khung-mat.canh-muon { transform: translateX(-10vw) scale(.65); }
+    #khung-mat.canh-chuc { transform: translateX(-8vw) scale(.65); }
+    #khung-mat.wish-beauty { transform: scale(.64); }
+    #khung-mat.wish-smile { transform: translateX(-17vw) translateY(1vh) scale(.64); }
+    #anh-hai-nguoi { height: 79vh; }
+    /* Điện thoại xoay ngang cũng dùng ảnh gốc đầy đủ, không crop mất đầu. */
+    #woman-scene, #woman-scene.hien-thi {
+        background-image: none !important;
+        background-color: transparent !important;
+        transform: none !important;
+    }
+    #woman-scene #woman-complete-mobile {
+        display: block;
+        position: absolute;
+        right: 4vw;
+        bottom: -1dvh;
+        height: 85dvh;
+        width: auto;
+        max-width: 42vw;
+        object-fit: contain;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 1.7s ease-in-out;
+    }
+    #woman-scene.hien-thi #woman-complete-mobile { opacity: 1; }
+    #woman-scene::before {
+        background: radial-gradient(ellipse 37vw 55dvh at 78% 69%,
+            rgba(255,70,75,.30), rgba(225,36,50,.14) 35%, transparent 100%);
+    }
+    #smile-stage .waguri-figure { height: 88vh; width: auto; max-width: 41vw; right: 0; bottom: -1vh; }
+    #tiny-lyric-zone { left: 30%; top: 66%; width: 34%; height: 30%; }
+    #tiny-lyric-zone .lyric-line { font-size: clamp(14px,3vh,18px); line-height: 1.15; }
+    #tiny-lyric-zone .lyric-line.compact { font-size: clamp(13px,2.7vh,16px); }
+}
+

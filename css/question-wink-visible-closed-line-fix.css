@@ -1,0 +1,19 @@
+/* extracted from index.html <style id="question-wink-visible-closed-line-fix"> */
+
+/* Chỉ cảnh câu hỏi: đường mí mắt gốc vẫn hiển thị lúc hình vuông co lại. */
+#khung-mat.question-one-eye .truc-x:last-child > .mat-cong,
+#khung-mat.wish-clover.wish-luck.question-one-eye .truc-x:last-child > .mat-cong {
+  visibility: visible !important;
+  opacity: var(--question-closed-line-opacity, 0) !important;
+  transition: none !important;
+  overflow: visible !important;
+  z-index: 9 !important;
+  filter: drop-shadow(0 0 7px rgba(0,255,255,.90)) drop-shadow(0 0 15px rgba(69,217,255,.56));
+}
+#khung-mat.question-one-eye .truc-x:last-child > .mat-cong path {
+  fill: none !important;
+  stroke: #9cffff !important;
+  stroke-width: 12px !important;
+  stroke-linecap: round !important;
+  stroke-linejoin: round !important;
+}

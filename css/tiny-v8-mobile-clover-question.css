@@ -1,0 +1,48 @@
+/* extracted from index.html <style id="tiny-v8-mobile-clover-question"> */
+
+/* Mobile V8: fewer simultaneous raster surfaces, retain original main animation. */
+.tiny-mobile #clover-stage .clover-ambient {
+  background: radial-gradient(ellipse 60% 54% at 52% 52%,rgba(33,148,70,.13),transparent 78%) !important;
+}
+.tiny-mobile #clover-stage .clover-sample-plant {
+  filter:none !important;
+}
+.tiny-mobile #clover-stage .clover-sample-glow {
+  filter:none !important;
+  opacity:.8;
+}
+.tiny-mobile #clover-stage .clover-firefly,
+.tiny-mobile #clover-stage .clover-particle {
+  filter:none !important;
+  box-shadow:0 0 4px rgba(127,255,164,.25) !important;
+}
+/* Retain the leaf silhouette; avoid a large full-screen SVG shader while the eye morph runs. */
+.tiny-mobile #clover-stage .clover-sample-garden svg,
+.tiny-mobile #clover-stage .clover-sample-plant path {
+  filter:none !important;
+}
+/* GPU-only fade on the retiring scene; do not repaint two animated canvas textures. */
+.tiny-mobile.tiny-v8-question-enter #luck-stage,
+.tiny-mobile.tiny-v8-question-enter #luck-front-field {
+  pointer-events:none !important;
+  will-change:opacity;
+}
+.tiny-mobile.tiny-v8-question-enter #luck-stage .luck-top-rays,
+.tiny-mobile.tiny-v8-question-enter #luck-stage .luck-ambient,
+.tiny-mobile.tiny-v8-question-enter #luck-stage .luck-bg-clover,
+.tiny-mobile.tiny-v8-question-enter #luck-front-field * {
+  animation-play-state:paused !important;
+}
+.tiny-mobile #luck-stage.tiny-v8-fade-luck,
+.tiny-mobile #luck-front-field.tiny-v8-fade-luck {
+  opacity:0 !important;
+  transition:opacity .23s ease-out !important;
+}
+.tiny-mobile #luck-stage.tiny-v8-retired-luck,
+.tiny-mobile #luck-front-field.tiny-v8-retired-luck {
+  display:none !important;
+}
+/* Ensure the question still shows its original eyes, wink line and cyan title. */
+.tiny-mobile.tiny-v8-question-enter #question-stage .question-space-haze {
+  filter:none !important;
+}

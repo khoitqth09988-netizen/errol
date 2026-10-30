@@ -1,0 +1,48 @@
+/* extracted from index.html <style id="tiny-reality-moon-rover-style"> */
+
+/* Toàn bộ cảnh robot dùng SVG+CSS+JS; không còn khung video hay ảnh nền đen. */
+#tiny-reality-scene .reality-moon-walk{
+  position:absolute;left:0;right:0;bottom:-3px;z-index:2;
+  height:clamp(175px,30vh,265px);overflow:visible;pointer-events:none;
+  opacity:0;transform:translateY(22px);
+  transition:opacity 1.05s ease .27s,transform 1.2s cubic-bezier(.2,.8,.2,1) .27s;
+}
+#tiny-reality-scene.reality-visible .reality-moon-walk{opacity:1;transform:translateY(0)}
+#tiny-reality-scene .reality-moon-walk svg.moon-landscape{
+  display:block;width:100%;height:100%;overflow:visible;
+  filter:drop-shadow(0 -7px 20px rgba(151,206,255,.08));
+}
+#tiny-reality-scene .moon-rover{filter:drop-shadow(2px 8px 4px rgba(4,11,24,.45))}
+#tiny-reality-scene .moon-rover-tread{animation:tinyTreadMove .66s linear infinite}
+#tiny-reality-scene .moon-rover-wheel{transform-box:fill-box;transform-origin:center;animation:tinyWheelTurn 1.15s linear infinite}
+#tiny-reality-scene .moon-rover-bob{animation:tinyRoverJiggle .68s ease-in-out infinite alternate}
+#tiny-reality-scene .moon-rover-light{animation:tinyRoverBlink 2.4s ease-in-out infinite}
+#tiny-reality-scene .moon-rover-star{transform-box:fill-box;transform-origin:center;animation:tinyRoverTwinkle 3.7s ease-in-out infinite alternate}
+@keyframes tinyTreadMove{to{stroke-dashoffset:-23}}
+@keyframes tinyWheelTurn{to{transform:rotate(360deg)}}
+@keyframes tinyRoverJiggle{from{transform:translateY(0px) rotate(-.55deg)}to{transform:translateY(-2px) rotate(.55deg)}}
+@keyframes tinyRoverBlink{0%,85%,100%{opacity:.5}92%{opacity:1}}
+@keyframes tinyRoverTwinkle{from{opacity:.25;transform:scale(.65)}to{opacity:.9;transform:scale(1.15)}}
+/* Nhường khoảng trống phía dưới cho xe và mặt trăng; mắt giữ đúng cỡ và hiệu ứng cũ. */
+#tiny-reality-scene .reality-face,#tiny-reality-scene .reality-message{
+  top:clamp(-48px,-5.5vh,-23px);
+}
+/* Trên desktop, nâng lời nhờ lên một chút để robot đi dưới chữ, không chạm chữ. */
+@media(min-width:651px){
+  #tiny-reality-scene .reality-message{top:clamp(-122px,-12vh,-74px)}
+}
+@media(max-width:650px){
+  #tiny-reality-scene .reality-moon-walk{height:clamp(145px,23vh,208px)}
+  #tiny-reality-scene .reality-face,#tiny-reality-scene .reality-message{top:-11px}
+}
+@media(max-height:590px){
+  #tiny-reality-scene .reality-moon-walk{height:clamp(118px,25vh,160px)}
+}
+@media(prefers-reduced-motion:reduce){
+  #tiny-reality-scene .reality-moon-walk{transition:none}
+  #tiny-reality-scene .moon-rover-tread,
+  #tiny-reality-scene .moon-rover-wheel,
+  #tiny-reality-scene .moon-rover-bob,
+  #tiny-reality-scene .moon-rover-light,
+  #tiny-reality-scene .moon-rover-star{animation:none!important}
+}

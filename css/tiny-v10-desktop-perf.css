@@ -1,0 +1,34 @@
+/* extracted from index.html <style id="tiny-v10-desktop-perf"> */
+
+
+/* V10 DESKTOP: eliminate animation work in invisible scenes without
+   changing their visible animations. Never target Tiny's eye/text layers. */
+html.tiny-desktop-performance #decor-want:not(.is-visible) *,
+html.tiny-desktop-performance #decor-health:not(.is-visible) *,
+html.tiny-desktop-performance #decor-beauty:not(.is-visible) *,
+html.tiny-desktop-performance #beauty-stage:not(.hien-thi) *,
+html.tiny-desktop-performance #smile-stage:not(.hien-thi) *,
+html.tiny-desktop-performance #clover-stage:not(.hien-thi) *,
+html.tiny-desktop-performance #luck-stage:not(.hien-thi) *,
+html.tiny-desktop-performance #question-stage:not(.hien-thi) *,
+html.tiny-desktop-performance #share-flight-scene:not(.share-visible) *,
+html.tiny-desktop-performance #tiny-reality-scene:not(.reality-visible) *,
+html.tiny-desktop-performance #tiny-shop-scene:not(.shop-visible) * {
+  animation-play-state:paused !important;
+}
+/* During crossfades, preserve Tiny/word motion but freeze expensive decoration. */
+html.tiny-desktop-performance.tiny-scene-transition #decor-want *,
+html.tiny-desktop-performance.tiny-scene-transition #decor-health *,
+html.tiny-desktop-performance.tiny-scene-transition #decor-beauty *,
+html.tiny-desktop-performance.tiny-scene-transition #uiverse-starfield #stars,
+html.tiny-desktop-performance.tiny-scene-transition #uiverse-starfield #stars2,
+html.tiny-desktop-performance.tiny-scene-transition #uiverse-starfield #stars3,
+html.tiny-desktop-performance.tiny-scene-transition #tiny-shop-scene .shop-magical-petal,
+html.tiny-desktop-performance.tiny-scene-transition #tiny-shop-scene .shop-magical-firefly,
+html.tiny-desktop-performance.tiny-scene-transition #tiny-shop-scene .dalabs-dream-mote {
+ animation-play-state:paused !important;
+}
+/* Make only visible words a compositing candidate, not hundreds of stars. */
+html.tiny-desktop-performance .text-layer.hien-thi {will-change:opacity;}
+html.tiny-desktop-performance .reference-wink-star {will-change:transform,opacity;}
+
