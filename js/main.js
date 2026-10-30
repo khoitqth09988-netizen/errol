@@ -2657,6 +2657,15 @@ const SPRITES = [taoSprite(1.02, 140), taoSprite(.96, 136), taoSprite(1.08, 145)
                       <span>💌</span> Sao chép link gửi bạn bè
                     </button>
                   </div>
+                  <div class="finale-share-row" aria-label="Chia sẻ nhanh trang web">
+                    <a class="finale-share-link finale-share-fb" id="finale-share-fb"
+                       href="https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(SHARE_FLIGHT_URL)}"
+                       target="_blank" rel="noopener noreferrer">Facebook</a>
+                    <a class="finale-share-link finale-share-zalo" id="finale-share-zalo"
+                       href="https://zalo.me/share?u=${encodeURIComponent(SHARE_FLIGHT_URL)}"
+                       target="_blank" rel="noopener noreferrer">Gửi Zalo</a>
+                  </div>
+                  <p class="finale-credit">Hẹn gặp lại cậu nhé 💙</p>
                 </div>
                 <p class="finale-tap-hint">💖 Chạm vào màn hình để thả tim</p>
             `;
