@@ -1,0 +1,217 @@
+/* ============================================================
+   Device optimization + motion polish layer — linked LAST.
+   1) Shell mobile/desktop an toàn (dvh, safe-area, touch, overscroll)
+   2) PC: focus-visible, con trỏ, phím tắt, micro-interaction mặc định
+   3) Màn hình ngang / thấp: co bố cục cảnh Share+Finale tránh tràn
+   4) Nâng cấp easing chuyển cảnh
+   5) Tối ưu GPU trên máy nhỏ
+   6) prefers-reduced-motion: tạm dừng trang trí vô hạn, cắt transition
+   ============================================================ */
+
+/* ---------- 1. Base shell ---------- */
+html {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    color-scheme: dark;
+    scrollbar-width: none;
+}
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+    display: none;
+}
+
+body {
+    height: 100vh;
+    height: 100dvh;              /* cao thật trên mobile khi thanh URL thu lại */
+    overscroll-behavior: none;   /* chặn pull-to-refresh & scroll chaining */
+    touch-action: manipulation;  /* hết delay double-tap zoom */
+    -webkit-tap-highlight-color: transparent;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* App-like: không cho bôi chọn chữ lung tung, trừ link chia sẻ cần copy tay */
+#share-copy-manual,
+.finale-share-link {
+    -webkit-user-select: text;
+    user-select: text;
+}
+
+img,
+svg,
+video,
+canvas {
+    -webkit-user-drag: none;
+}
+
+/* ---------- 2. PC affordances ---------- */
+button,
+[type="button"],
+[type="submit"] {
+    cursor: pointer;
+}
+[role="button"] {
+    cursor: pointer;
+}
+button:disabled,
+[aria-disabled="true"] {
+    cursor: default;
+}
+
+:focus-visible {
+    outline: 2px solid #9cf2ff;
+    outline-offset: 3px;
+    border-radius: 6px;
+}
+body:focus-visible {
+    outline: none;
+}
+
+/* Nút chưa có transition riêng được giao transition mượt mặc định
+   (specificity thấp nên mọi rule theo class vẫn thắng). */
+button {
+    transition-property: transform, box-shadow, opacity, filter, background-color, color;
+    transition-duration: .18s;
+    transition-timing-function: cubic-bezier(.22, 1, .36, 1);
+}
+
+/* ---------- 3. Safe-area (cần viewport-fit=cover) ---------- */
+#share-flight-scene {
+    inset: env(safe-area-inset-top, 0px) env(safe-area-inset-right, 0px)
+        env(safe-area-inset-bottom, 0px) env(safe-area-inset-left, 0px);
+}
+
+.tiny-copy-toast {
+    top: calc(clamp(15px, 5vh, 45px) + env(safe-area-inset-top, 0px));
+}
+
+#music-wait-hint {
+    bottom: calc(10% + env(safe-area-inset-bottom, 0px));
+}
+@media (max-width: 600px) {
+    #music-wait-hint {
+        bottom: calc(5% + env(safe-area-inset-bottom, 0px));
+    }
+}
+
+/* ---------- 4. Màn hình ngang / thấp: cảnh Share + Finale không được tràn ----------
+   (site không có @media (max-height) nào trước đây — điện thoại xoay ngang
+   từng bị cắt: heading + mắt + bàn bơm cao hơn viewport). */
+@media (orientation: landscape) and (max-height: 560px) {
+    #share-flight-scene {
+        padding-top: 6px;
+        padding-bottom: 6px;
+        padding-left: calc(12px + env(safe-area-inset-left, 0px));
+        padding-right: calc(12px + env(safe-area-inset-right, 0px));
+    }
+    .share-flight-heading {
+        margin-bottom: 2px;
+    }
+    .share-flight-heading h2 {
+        font-size: clamp(15px, 4.6vh, 26px);
+        line-height: 1.2;
+        margin: 0;
+    }
+    .share-tiny {
+        height: clamp(60px, 15vh, 80px);
+        width: min(190px, 34vw);
+        margin: 0 auto;
+    }
+    .share-tiny-eyes {
+        --tiny-eye-size: clamp(40px, 9vh, 56px);
+        --tiny-eye-gap: clamp(20px, 5vh, 34px);
+    }
+    .share-flight-device {
+        height: clamp(140px, 46vh, 190px);
+        margin-top: 2px;
+    }
+    .share-fuel-button {
+        height: clamp(104px, 72%, 150px);
+        width: clamp(96px, 23%, 170px);
+    }
+    .share-fuel-meter {
+        font-size: clamp(11px, 2.6vh, 14px);
+    }
+    .tiny-finale-panel {
+        margin-top: 4px;
+    }
+}
+
+/* ---------- 5. Nâng cấp easing chuyển cảnh ----------
+   Fade-in/out dùng curve hiện đại (đầu nhanh, đuôi dịu) thay ease-in-out. */
+.text-layer {
+    transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+}
+#pink-overlay,
+#xanh-overlay,
+#vang-overlay {
+    transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+}
+#share-flight-scene {
+    transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ---------- 6. Mobile GPU budget: mờ kính nhẹ hơn trên màn nhỏ ---------- */
+@media (max-width: 700px) {
+    .tiny-copy-toast,
+    .finale-status-badge,
+    .finale-wish-card {
+        backdrop-filter: blur(9px);
+        -webkit-backdrop-filter: blur(9px);
+    }
+}
+
+/* ---------- 7. prefers-reduced-motion ----------
+   Chỉ tạm dừng trang trí VÔ HẠN không gắn với animationend/iteration của JS
+   (đã đối chiếu: petal/depart/meteor không nằm trong danh sách này).
+   Transition (opacity/visibility) không bị JS đo lường -> cắt ngắn an toàn. */
+@media (prefers-reduced-motion: reduce) {
+    .tiny-star,
+    .lower-star,
+    .tiny-health-speck,
+    .tiny-beauty-firefly,
+    .tiny-meadow-blossom,
+    .wish-twinkle,
+    .butterfly-wrap,
+    .wing-pair,
+    .float-heart,
+    #decor-want .oracle-light,
+    #decor-want .oracle-orbit-one,
+    #decor-want .oracle-orbit-two,
+    #tiny-reality-scene .moon-rover-light,
+    #tiny-reality-scene .moon-rover-star,
+    #tiny-shop-scene .shop-stars,
+    #tiny-shop-scene .shop-magical-firefly,
+    #tiny-shop-scene .shop-magical-petal,
+    #tiny-shop-scene .mag-flower,
+    #tiny-shop-scene .mag-leaves,
+    #tiny-shop-scene .shop-emblem,
+    #tiny-shop-scene .shop-lamp,
+    #tiny-shop-scene .dalabs-rose,
+    #tiny-shop-scene .dalabs-mark,
+    #tiny-shop-scene .dalabs-tiktok,
+    #tiny-shop-scene .dalabs-dream-comets span,
+    #tiny-shop-scene .dalabs-dream-mote,
+    #tiny-shop-scene .dalabs-dream-stars,
+    #tiny-shop-scene .dalabs-top-sparkles,
+    #tiny-shop-scene .shop-wish-bridge svg,
+    #uiverse-starfield #stars,
+    #uiverse-starfield #stars2,
+    #uiverse-starfield #stars3 {
+        animation-play-state: paused !important;
+    }
+
+    /* Sao băng: ẩn thay vì đóng băng (JS dời vị trí qua animationiteration). */
+    .tiny-meteor {
+        opacity: 0 !important;
+    }
+
+    *,
+    *::before,
+    *::after {
+        transition-duration: 0.01s !important;
+        transition-delay: 0s !important;
+    }
+}

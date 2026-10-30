@@ -2780,7 +2780,7 @@ const SPRITES = [taoSprite(1.02, 140), taoSprite(.96, 136), taoSprite(1.08, 145)
             const animateFuel = now => {
                 if (activeWish !== 'share') return;
                 const t = Math.max(0,Math.min(1,(now-startTime)/duration));
-                const pct = 80 - 75 * easing(t);
+                const pct = 80 - 80 * easing(t);
                 shareFuelLiquid.style.setProperty('--fuel-remaining',pct.toFixed(1)+'%');
                 shareFuelMeter.textContent = Math.round(pct)+'%';
                 syncFuelEatenText();
@@ -2821,6 +2821,44 @@ const SPRITES = [taoSprite(1.02, 140), taoSprite(.96, 136), taoSprite(1.08, 145)
             if (document.getElementById('shop-product-modal')?.classList.contains('show')) return;
             chuyenCanh();
         });
+
+        // PC: phím tắt điều khiển — phím cách/Enter/→ chuyển cảnh, F bật/tắt toàn màn hình.
+        document.addEventListener('keydown', function(event) {
+            if (event.repeat) return;
+            const el = event.target instanceof Element ? event.target : null;
+            if (el && el.closest('a, button, input, textarea, select, summary, [role="button"], [contenteditable="true"]')) return;
+            if (document.getElementById('shop-product-modal')?.classList.contains('show')) return;
+            if (event.code === 'KeyF') {
+                try {
+                    const root = document.documentElement;
+                    if (document.fullscreenElement || document.webkitFullscreenElement) {
+                        (document.exitFullscreen || document.webkitExitFullscreen)?.call(document);
+                    } else {
+                        (root.requestFullscreen || root.webkitRequestFullscreen)?.call(root);
+                    }
+                } catch (_) {}
+                return;
+            }
+            if (event.code === 'Space' || event.code === 'Enter' || event.code === 'NumpadEnter' ||
+                event.code === 'ArrowRight' || event.code === 'PageDown') {
+                event.preventDefault();
+                chuyenCanh();
+            }
+        });
+
+        // Desktop: bổ sung gợi ý phím cách vào nudge intro (chỉ khi chuột/trackpad).
+        try {
+            if (window.matchMedia && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+                const nudge = document.getElementById('tiny-intro-nudge');
+                if (nudge && !nudge.querySelector('.nudge-kbd')) {
+                    const kbd = document.createElement('span');
+                    kbd.className = 'nudge-kbd';
+                    kbd.style.cssText = 'display:block;font-size:.8em;letter-spacing:.05em;opacity:.72;margin-top:3px';
+                    kbd.textContent = 'hoặc bấm phím cách để tiếp tục';
+                    nudge.appendChild(kbd);
+                }
+            }
+        } catch (_) {}
 
         function khoiDongLaVang() {
             const ctx = laCanvas.getContext('2d');
