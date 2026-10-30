@@ -2690,9 +2690,81 @@ const SPRITES = [taoSprite(1.02, 140), taoSprite(.96, 136), taoSprite(1.08, 145)
                 });
             });
 
+            // Nút mạng xã hội.
+            // Zalo: mobile PHẢI same-tab thì universal link mới mở thẳng app Zalo
+            // (target="_blank" thường rơi vào trang tải-app = "không chia sẻ được");
+            // desktop mở popup (trang Zalo hiện QR để quét). FB: desktop popup, mobile giữ _blank.
+            const coarsePointerNow = () =>
+                (window.matchMedia && (window.matchMedia('(hover: none)').matches || window.matchMedia('(pointer: coarse)').matches)) ||
+                /android|iphone|ipad|ipod|mobile/i.test(navigator.userAgent || '');
+            const wireSocialShare = (id, opts) => {
+                const a = document.getElementById(id);
+                if (!a) return;
+                a.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const url = a.href;
+                    const coarse = coarsePointerNow();
+                    if (opts.sameTabOnMobile && coarse) {
+                        e.preventDefault();
+                        window.location.href = url; // same-tab: Zalo app link hoạt động đúng
+                        return;
+                    }
+                    if (!coarse && openSocialSharePopup(url, opts.popupName)) {
+                        e.preventDefault();
+                        return;
+                    }
+                    if (opts.sameTabOnMobile) {
+                        // desktop mà popup bị chặn: vẫn mở same-tab để chia sẻ không bị "chết"
+                        e.preventDefault();
+                        window.location.href = url;
+                    }
+                });
+            };
+            wireSocialShare('finale-share-fb', { sameTabOnMobile: false, popupName: 'tiny-fb-share' });
+            wireSocialShare('finale-share-zalo', { sameTabOnMobile: true, popupName: 'tiny-zalo-share' });
+
+            // Hào quang lấp lách quanh panel + pháo giấy ăn mừng khi panel vừa hiện.
+            const reduceMotionNow = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+            if (!reduceMotionNow) {
+                const sparkleGlyphs = ['✨', '⭐', '💫', '🌟'];
+                for (let i = 0; i < 10; i++) {
+                    const sp = document.createElement('span');
+                    sp.className = 'finale-sparkle';
+                    sp.setAttribute('aria-hidden', 'true');
+                    sp.textContent = sparkleGlyphs[i % sparkleGlyphs.length];
+                    const side = i % 2 ? 84 + Math.random() * 12 : 4 + Math.random() * 12;
+                    sp.style.left = side + '%';
+                    sp.style.top = (6 + Math.random() * 84) + '%';
+                    sp.style.fontSize = (8 + Math.random() * 8) + 'px';
+                    sp.style.setProperty('--spark-dur', (3.6 + Math.random() * 3).toFixed(2) + 's');
+                    sp.style.setProperty('--spark-delay', (Math.random() * 4).toFixed(2) + 's');
+                    finale.appendChild(sp);
+                }
+                const burstRect = finale.getBoundingClientRect();
+                const bx = burstRect.left + burstRect.width / 2;
+                const by = burstRect.top + Math.min(burstRect.height * 0.4, 260);
+                for (let i = 0; i < 14; i++) {
+                    const bp = document.createElement('span');
+                    bp.className = 'finale-burst-particle';
+                    bp.setAttribute('aria-hidden', 'true');
+                    bp.textContent = sparkleGlyphs[Math.floor(Math.random() * sparkleGlyphs.length)];
+                    bp.style.left = bx + 'px';
+                    bp.style.top = by + 'px';
+                    bp.style.fontSize = (12 + Math.random() * 12) + 'px';
+                    const ang = Math.random() * Math.PI * 2;
+                    const dist = 70 + Math.random() * 110;
+                    bp.style.setProperty('--bx', (Math.cos(ang) * dist).toFixed(1) + 'px');
+                    bp.style.setProperty('--by', (Math.sin(ang) * dist - 60).toFixed(1) + 'px');
+                    bp.style.setProperty('--brot', Math.round(Math.random() * 160 - 80) + 'deg');
+                    document.body.appendChild(bp);
+                    setTimeout(() => bp.remove(), 1400);
+                }
+            }
+
             // Tap screen to spawn hearts
             const hearts = ['💖', '💕', '🌸', '✨', '🎀', '⭐', '💗'];
             const spawnHeart = (x, y) => {
+                if (reduceMotionNow) return;
                 const p = document.createElement('span');
                 p.className = 'floating-heart-particle';
                 p.textContent = hearts[Math.floor(Math.random() * hearts.length)];
@@ -2716,14 +2788,25 @@ const SPRITES = [taoSprite(1.02, 140), taoSprite(.96, 136), taoSprite(1.08, 145)
                 }
             });
 
-            // Ambient background hearts
-            setInterval(() => {
-                const x = Math.random() * window.innerWidth;
-                const y = window.innerHeight - 20;
-                spawnHeart(x, y);
-            }, 1200);
+            // Ambient background hearts (tôn trọng prefers-reduced-motion)
+            if (!reduceMotionNow) {
+                setInterval(() => {
+                    const x = Math.random() * window.innerWidth;
+                    const y = window.innerHeight - 20;
+                    spawnHeart(x, y);
+                }, 1200);
+            }
         }
     
+        // Mở link chia sẻ trong popup nhỏ giống hộp thoại (desktop).
+        // Trả về false nếu trình duyệt chặn popup.
+        function openSocialSharePopup(url, popupName) {
+            try {
+                const w = window.open(url, popupName, 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,width=760,height=680');
+                if (w && typeof w.focus === 'function') { w.focus(); return true; }
+            } catch (_) {}
+            return false;
+        }
         function fallbackCopyShareUrl() {
             const field = document.createElement('textarea');
             field.value = SHARE_FLIGHT_URL;
