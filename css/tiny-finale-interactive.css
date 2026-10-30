@@ -286,9 +286,22 @@
     box-shadow: 0 4px 14px rgba(24, 119, 242, .45);
 }
 
-.finale-share-zalo {
-    background: linear-gradient(135deg, #0068ff, #48a3ff);
-    box-shadow: 0 4px 14px rgba(0, 104, 255, .45);
+.finale-share-github {
+    background: linear-gradient(135deg, #2b3542, #151a21);
+    border: 1px solid rgba(255, 255, 255, .22);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, .45);
+    color: #f2f7ff;
+}
+
+.finale-btn-install {
+    background: linear-gradient(135deg, #2ea8ff, #00c6ff);
+    color: #fff;
+    box-shadow: 0 4px 15px rgba(46, 168, 255, .45);
+}
+
+.finale-btn-install:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 7px 22px rgba(46, 168, 255, .6);
 }
 
 .finale-credit {

@@ -2619,19 +2619,23 @@ const SPRITES = [taoSprite(1.02, 140), taoSprite(.96, 136), taoSprite(1.08, 145)
                 didFinish = true;
                 shareAirplane.removeEventListener('animationend', onDepartEnd);
                 shareAirplaneStand.remove();
-                
-                // Fade out the fuel button & hose smoothly
-                if (shareFlightDevice) {
-                    shareFlightDevice.style.transition = 'opacity 0.7s ease, transform 0.7s ease';
-                    shareFlightDevice.style.opacity = '0';
-                    shareFlightDevice.style.transform = 'translateY(35px)';
-                    shareFlightDevice.style.pointerEvents = 'none';
-                    setTimeout(() => { if (shareFlightDevice) shareFlightDevice.style.display = 'none'; }, 750);
-                }
-                if (shareFlightStatus) shareFlightStatus.style.display = 'none';
 
-                // Show finale interactive panel
-                showInteractiveFinale();
+                // Fade out the fuel button & hose — curve mềm (đầu nhanh, đuôi dịu)
+                if (shareFlightDevice) {
+                    shareFlightDevice.style.transition = 'opacity 1s cubic-bezier(.22,1,.36,1), transform 1s cubic-bezier(.22,1,.36,1)';
+                    shareFlightStatus && shareFlightStatus.classList.add('is-gone');
+                    shareFlightDevice.style.opacity = '0';
+                    shareFlightDevice.style.transform = 'translateY(38px)';
+                    shareFlightDevice.style.pointerEvents = 'none';
+                    setTimeout(() => { if (shareFlightDevice) shareFlightDevice.style.display = 'none'; }, 1050);
+                }
+                // Trạng thái fade-out thay vì biến mất một phát
+                if (shareFlightStatus) {
+                    setTimeout(() => { if (shareFlightStatus) shareFlightStatus.style.display = 'none'; }, 650);
+                }
+
+                // Để máy bay khuất hẳn + bàn bơm bắt đầu mờ rồi mới rải stagger finale
+                setTimeout(() => { showInteractiveFinale(); }, 430);
             };
             shareAirplane.addEventListener('animationend', onDepartEnd);
             setTimeout(finish, 1660); // fallback khi trình duyệt tắt animation
@@ -2661,9 +2665,13 @@ const SPRITES = [taoSprite(1.02, 140), taoSprite(.96, 136), taoSprite(1.08, 145)
                     <a class="finale-share-link finale-share-fb" id="finale-share-fb"
                        href="https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(SHARE_FLIGHT_URL)}"
                        target="_blank" rel="noopener noreferrer">Facebook</a>
-                    <a class="finale-share-link finale-share-zalo" id="finale-share-zalo"
-                       href="https://zalo.me/share?u=${encodeURIComponent(SHARE_FLIGHT_URL)}"
-                       target="_blank" rel="noopener noreferrer">Gửi Zalo</a>
+                  </div>
+                  <div class="finale-share-row finale-source-row" aria-label="Mã nguồn và cài đặt">
+                    <a class="finale-share-link finale-share-github" id="finale-github-link"
+                       href="https://github.com/khoitqth09988-netizen/errol"
+                       target="_blank" rel="noopener noreferrer">⬇️ Tải mã nguồn trên GitHub</a>
+                    <button type="button" id="btn-install-app" class="finale-btn finale-btn-install"
+                      style="display:none"><span>📥</span> Cài đặt ứng dụng</button>
                   </div>
                   <p class="finale-credit">Hẹn gặp lại cậu nhé 💙</p>
                 </div>
@@ -2721,7 +2729,29 @@ const SPRITES = [taoSprite(1.02, 140), taoSprite(.96, 136), taoSprite(1.08, 145)
                 });
             };
             wireSocialShare('finale-share-fb', { sameTabOnMobile: false, popupName: 'tiny-fb-share' });
-            wireSocialShare('finale-share-zalo', { sameTabOnMobile: true, popupName: 'tiny-zalo-share' });
+
+            // Cài đặt PWA: hiện nút khi trình duyệt hỗ trợ (Android/PC Chromium) hoặc iOS (hướng dẫn tay).
+            const installBtn = document.getElementById('btn-install-app');
+            const isIOSLike = /iphone|ipad|ipod/i.test(navigator.userAgent || '') ||
+                (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+            if (installBtn && (window.__tinyDeferredInstall || isIOSLike)) {
+                installBtn.style.display = 'inline-flex';
+            }
+            if (installBtn) installBtn.addEventListener('click', async (e) => {
+                e.stopPropagation();
+                const promptEvent = window.__tinyDeferredInstall;
+                if (promptEvent && typeof promptEvent.prompt === 'function') {
+                    window.__tinyDeferredInstall = null;
+                    try { promptEvent.prompt(); await promptEvent.userChoice; } catch (_) {}
+                    installBtn.style.display = 'none';
+                    return;
+                }
+                clearTimeout(shareToastTimer);
+                shareCopyToast.replaceChildren();
+                shareCopyToast.textContent = 'iPhone/iPad: bấm Chia sẻ ↗ rồi chọn “Thêm vào màn hình chính” để cài app.';
+                shareCopyToast.classList.add('show');
+                shareToastTimer = setTimeout(() => shareCopyToast.classList.remove('show'), 5200);
+            });
 
             // Hào quang lấp lách quanh panel + pháo giấy ăn mừng khi panel vừa hiện.
             const reduceMotionNow = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
@@ -2806,6 +2836,17 @@ const SPRITES = [taoSprite(1.02, 140), taoSprite(.96, 136), taoSprite(1.08, 145)
                 if (w && typeof w.focus === 'function') { w.focus(); return true; }
             } catch (_) {}
             return false;
+        }
+        // Ghi lại prompt cài đặt (Android/PC Chromium) để nút finale dùng sau.
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            window.__tinyDeferredInstall = e;
+        });
+        // PWA: service worker -> cài làm app trên mobile & PC, cache offline nhẹ.
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js').catch(() => {});
+            });
         }
         function fallbackCopyShareUrl() {
             const field = document.createElement('textarea');
