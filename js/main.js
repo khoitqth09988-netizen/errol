@@ -1,5 +1,21 @@
 // extracted from index.html <script id="(none)">
 
+        // ===== Preloader: an khi trang tai xong (failsafe 5s) =====
+        (() => {
+            const preloader = document.getElementById('tiny-preloader');
+            if (!preloader) return;
+            let hid = false;
+            const hide = () => {
+                if (hid) return;
+                hid = true;
+                preloader.classList.add('is-done');
+                setTimeout(() => { if (preloader.parentNode) preloader.remove(); }, 700);
+            };
+            if (document.readyState === 'complete') setTimeout(hide, 250);
+            else window.addEventListener('load', () => setTimeout(hide, 250), { once: true });
+            setTimeout(hide, 5000);
+        })();
+
         const text1 = document.getElementById('text-1');
         const text2 = document.getElementById('text-2');
         const text3 = document.getElementById('text-3');
@@ -8,6 +24,19 @@
         const text6 = document.getElementById('text-6');
         const text7 = document.getElementById('text-7');
         const text8 = document.getElementById('text-8');
+
+        // ===== Ten nguoi nhan: ?to=Ten -> loi chao mo dau + thiep finale.
+        // Link chia sẻ tự giữ nguyên query (?to=...) nên người gửi không cần làm gì thêm. =====
+        const TINY_RECIPIENT_NAME = (() => {
+            try {
+                const raw = new URL(window.location.href).searchParams.get('to') || '';
+                // Bo ky tu dieu khien/angle-bracket, gian khoang trang, gioi han 40 ky tu.
+                return raw.replace(/[\u0000-\u001f<>]/g, '').replace(/\s+/g, ' ').trim().slice(0, 40);
+            } catch (_) { return ''; }
+        })();
+        if (TINY_RECIPIENT_NAME && text1) {
+            text1.textContent = 'này ' + TINY_RECIPIENT_NAME + ' ơi';
+        }
 
         // Chỉ bật lớp trang trí tương ứng với lời chúc đang xuất hiện.
         (()=>{
@@ -67,7 +96,23 @@
         let lyricSlotIndex = -1;
         let lyricInterval = null;
         tinySoundtrack.volume = MUSIC_VOLUME;
-        tinySoundtrack.muted = false;
+        // ===== Nut bat/tat nhac (nho preference vao localStorage) =====
+        const musicToggleBtn = document.getElementById('btn-music-toggle');
+        let musicMutedPref = false;
+        try { musicMutedPref = localStorage.getItem('tinyMusicMuted') === '1'; } catch (_) {}
+        function applyMusicMuted(muted, persist) {
+            tinySoundtrack.muted = !!muted;
+            if (musicToggleBtn) {
+                musicToggleBtn.classList.toggle('is-muted', !!muted);
+                musicToggleBtn.setAttribute('aria-pressed', String(!!muted));
+            }
+            if (persist) { try { localStorage.setItem('tinyMusicMuted', muted ? '1' : '0'); } catch (_) {} }
+        }
+        applyMusicMuted(musicMutedPref, false);
+        if (musicToggleBtn) musicToggleBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            applyMusicMuted(!tinySoundtrack.muted, true);
+        });
         let musicHintTimer = null;
         const musicWaitMessages = ['đợi chút xíu đii', 'đợi chút nữa thui', 'xíu nữa', 'sắp được rùi', '1 chút thuii'];
         function showMusicWaitHint() {
@@ -2689,6 +2734,14 @@ const SPRITES = [taoSprite(1.02, 140), taoSprite(.96, 136), taoSprite(1.08, 145)
                 <p class="finale-tap-hint">💖 Chạm vào màn hình để thả tim</p>
             `;
             shareFlightScene.appendChild(finale);
+
+            // Goi ten neu trang mo voi ?to=Ten (textContent -> an toan, khong innerHTML).
+            if (TINY_RECIPIENT_NAME) {
+                const wishTitleEl = finale.querySelector('.finale-wish-title');
+                const wishBadgeEl = finale.querySelector('.finale-status-badge');
+                if (wishTitleEl) wishTitleEl.textContent = '🌸 Chúc ' + TINY_RECIPIENT_NAME + ' 20/10 Thật Vui Vẻ & Hạnh Phúc! 🌸';
+                if (wishBadgeEl) wishBadgeEl.textContent = '✨ Máy bay đã mang lời chúc tới ' + TINY_RECIPIENT_NAME + ' ✨';
+            }
 
             // Replay button
             document.getElementById('btn-replay').addEventListener('click', (e) => {

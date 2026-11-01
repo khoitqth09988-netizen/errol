@@ -95,9 +95,14 @@
     <meta property="og:description" content="Khu vườn ước mơ của Tiny: lời chúc, âm nhạc và những chuyển cảnh nhỏ nhân ngày 20/10.">
     <meta property="og:type" content="website">
     <meta property="og:locale" content="vi_VN">
-    <meta property="og:image" content="media/og-cover.png">
+    <meta property="og:url" content="https://khoitqth09988-netizen.github.io/errol/">
+    <meta property="og:image" content="https://khoitqth09988-netizen.github.io/errol/media/og-cover.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Sự thức giấc của Tiny - Ngày 20/10">
+    <meta name="twitter:description" content="Khu vườn ước mơ của Tiny: lời chúc, âm nhạc và những chuyển cảnh nhỏ nhân ngày 20/10.">
+    <meta name="twitter:image" content="https://khoitqth09988-netizen.github.io/errol/media/og-cover.png">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content="media/og-cover.png">
     <link rel="icon" href="media/favicon.svg" type="image/svg+xml">
@@ -114,6 +119,12 @@
         Trang này cần JavaScript để chạy — cậu hãy bật JavaScript rồi tải lại nhé.
       </div>
     </noscript>
+
+<!-- Preloader: che cảnh nhảy cóc khi tài nguyên còn tải (pointer-events:none để không chặn thao tác). -->
+<div id="tiny-preloader" aria-hidden="true">
+  <span class="tiny-preloader-mark">🌸</span>
+  <span class="tiny-preloader-text">Tiny đang chuẩn bị quà…</span>
+</div>
 
 <!-- Ba bộ trang trí lời chúc; chỉ hiện khi câu tương ứng xuất hiện. -->
 <div id="tiny-wish-decor" aria-hidden="true"><div class="tiny-decor-mode tiny-decor-want" id="decor-want">
@@ -215,6 +226,10 @@
 
     <!-- Âm thanh nhúng sẵn, không cần thư mục đi kèm. -->
     <audio id="tiny-soundtrack" preload="auto" autoplay playsinline src="media/tiny-soundtrack.mp3"></audio>
+    <button type="button" id="btn-music-toggle" aria-pressed="false" aria-label="Bật hoặc tắt nhạc">
+      <svg class="icon-on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" fill="currentColor" stroke="none"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
+      <svg class="icon-muted" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" fill="currentColor" stroke="none"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
+    </button>
     <div id="music-wait-hint" aria-live="polite">đợi chút xíu đii</div>
     <div id="tiny-lyric-zone" aria-live="off" aria-hidden="true">
       <div class="lyric-line" id="tiny-lyric-top"></div>

@@ -3535,3 +3535,48 @@ body.luck-scene #khung-mat { z-index: 6; }
 #luck-stage .luck-fall-field { z-index:2; }
 #luck-front-field { z-index:7; }
 
+
+/* ===== Preloader: màn hình chờ đầu trang ===== */
+#tiny-preloader {
+    position: fixed;
+    inset: 0;
+    z-index: 9990;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    background:
+        radial-gradient(1200px 700px at 50% 30%, rgba(38, 60, 110, .55), transparent 70%),
+        #070d1a;
+    pointer-events: none; /* không chặn thao tác trong lúc tải */
+    transition: opacity .6s ease, visibility .6s ease;
+}
+#tiny-preloader.is-done {
+    opacity: 0;
+    visibility: hidden;
+}
+.tiny-preloader-mark {
+    font-size: clamp(38px, 10vw, 52px);
+    line-height: 1;
+    animation: tinyPreloaderBreathe 1.4s ease-in-out infinite;
+    filter: drop-shadow(0 0 14px rgba(255, 150, 205, .55));
+}
+.tiny-preloader-text {
+    font-size: clamp(11px, 3vw, 13px);
+    letter-spacing: .2em;
+    color: #a9dcff;
+    opacity: .85;
+    animation: tinyPreloaderText 1.8s ease-in-out infinite;
+}
+@keyframes tinyPreloaderBreathe {
+    0%, 100% { transform: scale(1); opacity: .85; }
+    50% { transform: scale(1.14); opacity: 1; }
+}
+@keyframes tinyPreloaderText {
+    0%, 100% { opacity: .55; }
+    50% { opacity: .95; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .tiny-preloader-mark, .tiny-preloader-text { animation: none; }
+}

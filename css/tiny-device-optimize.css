@@ -266,3 +266,50 @@ button {
         animation: none !important;
     }
 }
+
+/* ===== Nút bật/tắt nhạc (góc trên phải, tôn trọng safe-area) ===== */
+#btn-music-toggle {
+    position: fixed;
+    top: calc(10px + env(safe-area-inset-top, 0px));
+    right: calc(10px + env(safe-area-inset-right, 0px));
+    z-index: 9991; /* trên preloader, dưới hearts/burst */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    padding: 0;
+    border-radius: 50%;
+    border: 1px solid rgba(162, 234, 255, .35);
+    background: rgba(13, 22, 40, .55);
+    color: #bdf2ff;
+    cursor: pointer;
+    touch-action: manipulation;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, .3);
+    transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+}
+#btn-music-toggle svg {
+    width: 20px;
+    height: 20px;
+}
+#btn-music-toggle .icon-muted { display: none; }
+#btn-music-toggle.is-muted .icon-on { display: none; }
+#btn-music-toggle.is-muted .icon-muted { display: block; }
+#btn-music-toggle.is-muted {
+    color: #97a6c2;
+    border-color: rgba(151, 166, 194, .35);
+}
+#btn-music-toggle:active { transform: scale(.92); }
+#btn-music-toggle:focus-visible {
+    outline: 2px solid #a2eaff;
+    outline-offset: 3px;
+}
+@media (hover: hover) {
+    #btn-music-toggle:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 6px 18px rgba(162, 234, 255, .25);
+        border-color: rgba(162, 234, 255, .6);
+    }
+}

@@ -35,6 +35,9 @@ Sau mỗi bước, người xem có thể **chạm vào màn hình để thả t
 - 📲 **Cài đặt như app (PWA)** — có `manifest.json` + `sw.js` (service worker): cài trên **Android, iPhone/iPad, PC**; hỗ trợ xem offline
 - ⚡ **Tối ưu thiết bị** — chuyển bản tĩnh khi ra khỏi màn hình, tôn trọng `prefers-reduced-motion`, tối ưu LCP (preload ảnh hero), giao diện responsive từ điện thoại nhỏ đến desktop rộng
 - 🎨 **Hiệu ứng đẹp mắt** — stagger entrance, shimmer tiêu đề, hào quang quanh panel, pháo giấy ăn mừng, trái tim bay lên khi chạm
+- 🎁 **Cá nhân hóa link chúc** — thêm `?to=Tên` vào URL (ví dụ `.../errol/?to=Ngọc`): Tiny gọi tên người nhận ngay câu đầu, thiệp finale chúc đích danh, link chia sẻ tự giữ tên
+- 🔇 **Nút bật/tắt nhạc** góc màn hình — nhớ sẵn lựa chọn trong trình duyệt
+- ⏳ **Màn hình chờ** thanh mảnh trong lúc tải tài nguyên (tự ẩn, có failsafe)
 
 ---
 
