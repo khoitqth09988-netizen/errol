@@ -3,7 +3,7 @@
 /* Các hiệu ứng tham khảo ý tưởng từ tsParticles (hạt), SVG tim, hoa nở;
    tự viết CSS/SVG để HTML hoạt động hoàn toàn ngoại tuyến. */
 #tiny-wish-decor {position:fixed;inset:0;z-index:6;pointer-events:none;overflow:hidden;isolation:isolate;}
-.tiny-decor-mode {position:absolute;inset:0;opacity:0;visibility:hidden;transition:opacity 1.35s ease,visibility 1.35s;}
+.tiny-decor-mode {position:absolute;inset:0;opacity:0;visibility:hidden;transition:opacity 1.35s cubic-bezier(.22,1,.36,1),visibility 1.35s;}
 .tiny-decor-mode.is-visible {opacity:1;visibility:visible;}
 .tiny-decor-mode:not(.is-visible) *, .tiny-decor-mode:not(.is-visible) *::before, .tiny-decor-mode:not(.is-visible) *::after {animation-play-state:paused!important;}
 /* 'Nên là tớ muốn' — sao kết nối như sợi chỉ điều ước, đặt xa chữ và Tiny. */

@@ -1,19 +1,34 @@
 // extracted from index.html <script id="(none)">
 
-        // ===== Preloader: an khi trang tai xong (failsafe 5s) =====
+        // ===== Preloader: an khi anh hero + fonts san sang (min 450ms, failsafe 5s).
+        // Khong doan theo window.load vi mp3 preload=oang co the keo dai load rat lau tren mang cham. =====
         (() => {
             const preloader = document.getElementById('tiny-preloader');
             if (!preloader) return;
             let hid = false;
+            const t0 = performance.now();
             const hide = () => {
                 if (hid) return;
                 hid = true;
                 preloader.classList.add('is-done');
                 setTimeout(() => { if (preloader.parentNode) preloader.remove(); }, 700);
             };
-            if (document.readyState === 'complete') setTimeout(hide, 250);
-            else window.addEventListener('load', () => setTimeout(hide, 250), { once: true });
-            setTimeout(hide, 5000);
+            const hideWhenReady = () => {
+                const wait = Math.max(0, 450 - (performance.now() - t0));
+                setTimeout(hide, wait);
+            };
+            const heroImg = document.getElementById('anh-hai-nguoi');
+            const heroReady = (!heroImg || heroImg.complete)
+                ? Promise.resolve()
+                : new Promise((res) => {
+                    heroImg.addEventListener('load', res, { once: true });
+                    heroImg.addEventListener('error', res, { once: true });
+                });
+            const fontsReady = (document.fonts && document.fonts.ready)
+                ? document.fonts.ready.catch(() => {})
+                : Promise.resolve();
+            Promise.all([heroReady, fontsReady]).then(hideWhenReady, hideWhenReady);
+            setTimeout(hide, 5000); // failsafe
         })();
 
         const text1 = document.getElementById('text-1');
