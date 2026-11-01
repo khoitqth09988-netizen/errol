@@ -107,6 +107,12 @@
         let musicFadeTimer = null;
         let musicResumeFadeStart = 0;
         let musicSeekingResume = false;
+        // Fade-in giữ nhạc theo đồng hồ tường: trên mobile currentTime hay nhảy
+        // một mạch do đệm -> nếu bám theo currentTime thì âm bị "cắt" đột ngột.
+        let musicFadeWallStart = 0;
+        let musicFadeWallMs = 1200;
+        let musicFadeFromVol = 0.84;
+        let musicHoldTimer = null;
         let lyricActiveIndex = -1;
         let lyricSlotIndex = -1;
         let lyricInterval = null;
@@ -147,26 +153,56 @@
             if (p && typeof p.catch === 'function') p.catch(() => {});
         }
 
+        function closeMusicGate() {
+            if (musicGateClosed || musicAllowedPastGate) return;
+            musicGateClosed = true;
+            scheduleIntroNudge(2000);
+            tinySoundtrack.pause();
+            try { tinySoundtrack.currentTime = MUSIC_HOLD_TIME; } catch (_) {}
+            tinySoundtrack.volume = 0;
+            musicFadeWallStart = 0;
+            if (musicFadeTimer !== null) { clearInterval(musicFadeTimer); musicFadeTimer = null; }
+        }
+
         function musicFadeAndHold() {
-            if (musicAllowedPastGate || musicGateClosed) return;
+            if (musicAllowedPastGate || musicGateClosed || musicHoldTimer !== null) return;
             const t = tinySoundtrack.currentTime || 0;
             if (t >= MUSIC_HOLD_TIME - .02) {
-                musicGateClosed = true;
-                scheduleIntroNudge(2000);
-                tinySoundtrack.pause();
-                try { tinySoundtrack.currentTime = MUSIC_HOLD_TIME; } catch (_) {}
-                tinySoundtrack.volume = 0;
-                if (musicFadeTimer !== null) { clearInterval(musicFadeTimer); musicFadeTimer = null; }
+                // currentTime có thể nhảy một mạch tới điểm giữ (đệm mạng chậm trên
+                // mobile). Không pause ngay ở volume đang to -> trượt mềm từ mức hiện
+                // tại về 0 rồi mới giữ nhạc, tránh âm bị cắt cụt giữa chừng.
+                if (!musicFadeWallStart) {
+                    musicFadeWallStart = performance.now();
+                    musicFadeWallMs = 450;
+                    musicFadeFromVol = tinySoundtrack.volume || MUSIC_VOLUME;
+                }
+                const wallK = (performance.now() - musicFadeWallStart) / musicFadeWallMs;
+                if (wallK >= 1) { closeMusicGate(); return; }
+                // KHÔNG BAO GIỜ tăng âm lượng: lấy mức thấp nhất đang có.
+                tinySoundtrack.volume = Math.min(tinySoundtrack.volume, Math.max(0, musicFadeFromVol * (1 - wallK)));
                 return;
             }
             if (t >= MUSIC_FADE_START) {
-                tinySoundtrack.volume = MUSIC_VOLUME * Math.max(0, (MUSIC_HOLD_TIME - t) / (MUSIC_HOLD_TIME - MUSIC_FADE_START));
+                // Fade thường: trượt theo đồng hồ tường (mượt, không phụ thuộc
+                // tần suất timeupdate) và luôn lấy mức thấp nhất của hai đường
+                // để âm lượng KHÔNG BAO GIỜ tăng lại trong cửa sổ fade.
+                if (!musicFadeWallStart) {
+                    musicFadeWallStart = performance.now();
+                    musicFadeWallMs = 1200;
+                    musicFadeFromVol = tinySoundtrack.volume || MUSIC_VOLUME;
+                }
+                const wallK = Math.min(1, (performance.now() - musicFadeWallStart) / musicFadeWallMs);
+                const byTime = Math.max(0, (MUSIC_HOLD_TIME - t) / (MUSIC_HOLD_TIME - MUSIC_FADE_START));
+                const k = Math.min(byTime, wallK);
+                tinySoundtrack.volume = Math.min(tinySoundtrack.volume, musicFadeFromVol * (1 - k));
             }
         }
 
         // Chỉ phát tiếp sau khi nghe đủ 9,7 giây VÀ click vào "ui cậu đẹp quá".
         function resumeMusicAtBeauty() {
             if (musicAllowedPastGate) return;
+            // Huỷ lịch "tắt mềm" còn dở dang nếu người dùng qua cửa trước khi ramp xong.
+            if (musicHoldTimer !== null) { clearTimeout(musicHoldTimer); musicHoldTimer = null; }
             if (!musicGateClosed || tinySoundtrack.currentTime < MUSIC_HOLD_TIME - .045) return;
             musicAllowedPastGate = true;
             musicGateClosed = false;
@@ -188,11 +224,18 @@
             };
             // Đợi âm thanh PHÁT THỰC SỰ rồi mới đếm 850ms tăng âm lượng.
             // Nếu bắt đầu rAF trước play() xong thì có thể bị kẹt tại volume=0.
-            tinySoundtrack.addEventListener('playing', () => {
+            // Ngược lại, nếu audio ĐÃ đang phát thì 'playing' sẽ không bao giờ bắn
+            // lại -> fade ngay, không kẹt vĩnh viễn ở volume=0 (mất tiếng).
+            const beginResumeFade = () => {
                 musicResumeFadeStart = performance.now();
                 requestAnimationFrame(fadeIn);
-            }, {once:true});
-            startMusicIfAllowed();
+            };
+            if (!tinySoundtrack.paused) {
+                beginResumeFade();
+            } else {
+                tinySoundtrack.addEventListener('playing', beginResumeFade, {once:true});
+                startMusicIfAllowed();
+            }
         }
 
         function cueIndexAt(t) {
